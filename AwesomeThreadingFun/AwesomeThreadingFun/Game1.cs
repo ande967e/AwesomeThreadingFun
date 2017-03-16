@@ -4,6 +4,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AwesomeThreadingFun
 {
+
+    /*
+     * 
+     * 
+     * Guess what just worked \o/ ~Andreas
+     * 
+     * 
+     */ 
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
