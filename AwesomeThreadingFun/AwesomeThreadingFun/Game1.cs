@@ -4,18 +4,27 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AwesomeThreadingFun
 {
+
+    /*
+     * 
+     * 
+     * Guess what just worked \o/ ~Andreas
+     * 
+     * 
+     */ 
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
     public class Game1 : Game
     {
-        //Le meh
-
+        private static Game1 _instance;
+        public static Game1 Instance { get { return _instance == null ? _instance = new Game1() : _instance; } }
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        private Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
