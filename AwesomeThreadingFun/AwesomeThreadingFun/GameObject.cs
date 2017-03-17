@@ -11,6 +11,8 @@ namespace AwesomeThreadingFun
 {
     class GameObject
     {
+        public float Scale;
+
         private bool kill;
         private Thread UpdateThread;
 
@@ -19,6 +21,13 @@ namespace AwesomeThreadingFun
         public GameObject()
         {
             this.kill = false;
+            Scale = 1;
+        }
+
+        public GameObject(float scale)
+        {
+            this.kill = false;
+            this.Scale = scale;
         }
 
         public void Draw(SpriteBatch sb)

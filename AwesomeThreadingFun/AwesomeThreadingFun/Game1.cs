@@ -30,7 +30,7 @@ namespace AwesomeThreadingFun
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            Other.Picture.Initialize(Content);
             base.Initialize();
         }
 
