@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
-using System.Threading;
+using Microsoft.Xna.Framework;
 using AwesomeThreadingFun.Components;
 
 namespace AwesomeThreadingFun
@@ -45,7 +46,7 @@ namespace AwesomeThreadingFun
         private void Update()
         {
             while (!kill)
-                components.FindAll(c => c is IUpdateable).ForEach(c => (c as IUpdateable).Update(DateTime.Now));
+                components.FindAll(c => c is IUpdateable).ForEach(c => (c as IUpdateable).Update(Gameworld.Instance.MaxElapsedTime));
         }
 
         /// <summary>

@@ -11,8 +11,9 @@ namespace AwesomeThreadingFun.Components
     class Renderer : Component, IDrawable
     {
         #region Properties
-        private Texture2D sprite;
-        private Rectangle sourceRectangle;
+        public Texture2D Sprite { get; set; }
+        public Rectangle SourceRectangle { private get; set; }
+
         private Color color;
         #endregion
 
@@ -32,9 +33,9 @@ namespace AwesomeThreadingFun.Components
         public Renderer(GameObject go, Texture2D texture, Color color)
             : base(go)
         {
-            this.sprite = texture;
+            this.Sprite = texture;
             this.color = color;
-            this.sourceRectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
+            this.SourceRectangle = new Rectangle(0, 0, Sprite.Width, Sprite.Height);
         }
 
         public Renderer(GameObject go, string texture, Rectangle sourceRectangle) 
@@ -51,8 +52,8 @@ namespace AwesomeThreadingFun.Components
 
         public Renderer(GameObject go, Texture2D texture, Rectangle sourceRectangle, Color color) : base(go)
         {
-            this.sprite = texture;
-            this.sourceRectangle = sourceRectangle;
+            this.Sprite = texture;
+            this.SourceRectangle = sourceRectangle;
             this.color = color;
         }
         #endregion
@@ -60,8 +61,8 @@ namespace AwesomeThreadingFun.Components
         #region Methods
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(sprite, new Rectangle((Point)Transform.Position, new Point((int)(sourceRectangle.Width * Gameobject.Scale), 
-                (int)(sourceRectangle.Height * Gameobject.Scale))), Color.White);
+            sb.Draw(Sprite, new Rectangle((Point)Transform.Position, new Point((int)(SourceRectangle.Width * Gameobject.Scale), 
+                (int)(SourceRectangle.Height * Gameobject.Scale))), Color.White);
         }
         #endregion
     }
