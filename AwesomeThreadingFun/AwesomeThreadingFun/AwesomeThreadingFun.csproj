@@ -41,7 +41,7 @@
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Renderer.cs" />
     <Compile Include="Components\Transform.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Gameworld.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Other\Picture.cs" />

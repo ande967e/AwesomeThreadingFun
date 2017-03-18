@@ -14,7 +14,7 @@ namespace AwesomeThreadingFun
         [STAThread]
         static void Main()
         {
-            using (var game = Game1.Instance)
+            using (var game = Gameworld.Instance)
                 game.Run();
         }
     }
