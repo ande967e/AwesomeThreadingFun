@@ -60,6 +60,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopItems\Counter.cs" />
+    <Compile Include="ShopItems\Contract.cs" />
     <Compile Include="ShopItems\Loadingbay.cs" />
   </ItemGroup>
   <ItemGroup>

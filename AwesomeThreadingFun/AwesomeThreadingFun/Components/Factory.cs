@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using AwesomeThreadingFun.Builder;
+using AwesomeThreadingFun.ShopItems;
 
 namespace AwesomeThreadingFun.Components
 {
@@ -13,60 +14,65 @@ namespace AwesomeThreadingFun.Components
         private int truckCargoSize; //the amount of cargo the truck carries.
         private int truckTravelSpeed; //the speed of which the truck travels.
         private int truckOnloadTime; //Time it takes to onload a truck.
-        private int contractAmount; //amount of contracts.
         private Director director;
-        private int contractTime; //the amount of time the contract holds before it stops.          --> Miliseconds.
-        private int contractTimer; //indicates the amount of time the contract have been active.
         private int spawnSpeed; //the time between trucks are send on it's way.                     --> Miliseconds.
         private int spawnTimer; //indicates the upcounter until next truck spawn.
-        private int maxNumberOfTrucks;
-        private int numberOfTrucks;
+        private List<Contract> contracts;
 
-        public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int contractTime, int truckOnloadTime, int maxNumberOfTrucks) : base(go)
+        //Values to construct a contract
+        private int maxNumberOfTrucks;
+        private int contractTime; //the amount of time the contract holds before it stops.          --> Miliseconds.
+
+
+        public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int truckOnloadTime) : base(go)
         {
             this.spawnSpeed = spawnSpeed;
             this.truckCargoSize = truckCargoSize;
             this.truckTravelSpeed = truckTravelSpeed;
             this.truckOnloadTime = truckOnloadTime;
-            this.contractTime = contractTime;
             director = new Director(new Truckbuilder(this.Gameobject, this.truckTravelSpeed, this.truckCargoSize, this.truckOnloadTime));
-            this.maxNumberOfTrucks = maxNumberOfTrucks;
-
         }
 
         public void Update(TimeSpan time)
         {
-            //runs if there are any contracts.
-            if (contractAmount > 0)
-            {
-                //removes a contract if it's time limit is reached.
-                contractTimer += time.Milliseconds;
-                if (contractTimer >= contractTime)
-                {
-                    contractAmount--;
-                    contractTimer = 0;
-                }
+            //checks if new contract should be bought, and buys if so
+            CheckAndBuyContract();
 
-                //adds a truck if enough time has passed.
-                spawnTimer += time.Milliseconds;
-                if (spawnTimer > spawnSpeed && numberOfTrucks < maxNumberOfTrucks)
+            //runs if there are any contracts.
+            if (contracts.Count > 0)
+            {
+                //runs through all the contrats in the list contracts
+                foreach(Contract c in contracts)
                 {
-                    SpawnTruck();
-                    spawnTimer = 0;
+                    //adds to the contract's time it has been alive.
+                    c.ContractTimer += time.Milliseconds;
+
+                    //Spawns trucks.
+                    if((c.ContractTimer - spawnSpeed*c.NumberOfTrucks) >= spawnSpeed && c.MaxNumberOfTrucks > c.NumberOfTrucks)
+                    {
+                        SpawnTruck(c);
+                    }
+
+                    //If the contracts time has been exceeded it will be removed.
+                    if (c.ContractTimer >= c.ContractTime)
+                        contracts.Remove(c);
                 }
             }  
         }
 
-        public void SpawnTruck()
+        public void SpawnTruck(Contract c)
         {
             director.BuildObject();
-            numberOfTrucks++;
+            c.NumberOfTrucks++;
         }
 
-        public void BuyContract()
+        public void CheckAndBuyContract()
         {
-            contractAmount++;
-
+            if(this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Contains(InputManager.GetMouseBounds()) &&
+                InputManager.GetIsMouseButtonReleased(MouseButton.Left))
+            {
+                contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
+            }
         }
     }
 }
