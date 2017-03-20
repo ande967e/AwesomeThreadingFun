@@ -9,11 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Shop : Component//IUpdateable
+    class Shop : Component, IUpdateable
     {
         private int Stock;
         private int Money;
-        //new List<Contracts> contracts;
+        new List<Loadingbay> contracts;
+        
 
         public Shop (GameObject go) : base (go)
         {
@@ -27,12 +28,12 @@ namespace AwesomeThreadingFun.Components
 
         private void UpdateStock()
         {
-            //if ()
+            if ()
             {
 
             }
 
-            //if ()
+            if ()
             {
 
             }
