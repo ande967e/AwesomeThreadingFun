@@ -26,15 +26,18 @@ namespace AwesomeThreadingFun.Components
         
         public void Update(TimeSpan time)
         {
-            
+            for(int i = 0; i < loadingbays.Count; i++)
+            {
+                Stock += loadingbays[i].GetGoods();
+            }
         }
 
         public Loadingbay RequestLoadingBay()
         {
-            lock{ return loadingbays.Find(l => l.)}
+            lock{ return loadingbays.Find(l => l.interacter == null); }
         }
 
-        private void UpdateStock()
+        /*private void UpdateStock()
         {
             if ()
             {
@@ -45,6 +48,6 @@ namespace AwesomeThreadingFun.Components
             {
 
             }
-        }
+        }*/
     }
 }

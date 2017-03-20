@@ -10,7 +10,7 @@ namespace AwesomeThreadingFun.ShopItems
 {
     class Loadingbay : IInteractable
     {
-        private GameObject interacter;
+        public GameObject interacter;
         private object key = new object();
         private int goods;
 
