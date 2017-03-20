@@ -41,6 +41,7 @@
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Renderer.cs" />
+    <Compile Include="Components\Shop.cs" />
     <Compile Include="Components\Transform.cs" />
     <Compile Include="Gameworld.cs" />
     <Compile Include="GameObject.cs" />
