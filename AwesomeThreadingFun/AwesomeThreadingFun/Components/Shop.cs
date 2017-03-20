@@ -9,30 +9,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Shop : Component, IUpdateable
+    class Shop : Component//IUpdateable
     {
         private int Stock;
         private int Money;
-        new List<Contracts> contracts;
+        //new List<Contracts> contracts;
 
         public Shop (GameObject go) : base (go)
         {
 
         }
         
-        private void Update()
+        private void Update(TimeSpan time)
         {
             
         }
 
         private void UpdateStock()
         {
-            if ()
+            //if ()
             {
 
             }
 
-            if ()
+            //if ()
             {
 
             }
