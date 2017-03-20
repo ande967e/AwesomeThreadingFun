@@ -51,6 +51,7 @@ namespace AwesomeThreadingFun.Other
         public int X { get; set; }
         public int Y { get; set; }
         public float Length { get { return (float)Math.Sqrt(X * X + Y * Y); } }
+        public VectorF Normalized { get { return new VectorF(X / Length, Y / Length); } }
         public static Vector Zero { get { return new Vector(0, 0); } }
         #endregion
 

@@ -18,6 +18,7 @@ namespace AwesomeThreadingFun
         public Renderer Renderer { get; private set; }
 
         private bool kill;
+        private bool started;
         private Thread UpdateThread;
 
         private List<Component> components;
@@ -26,6 +27,7 @@ namespace AwesomeThreadingFun
         {
             components = new List<Component>();
             this.kill = false;
+            this.started = false;
             Scale = 1;
         }
 
@@ -54,20 +56,29 @@ namespace AwesomeThreadingFun
             Gameworld.Instance.Remove(this);
         }
 
+        public void Interact(Truck sender)
+           => components.FindAll(c => c is IInteractable).ForEach(c => (c as IInteractable).Interact(sender));
+
         /// <summary>
         /// Starts the thread associated with the gameobject
         /// </summary>
         public void Start()
         {
-            this.kill = false;
-            (UpdateThread = new Thread(Update)).Start();
+            if (!this.started)
+            {
+                this.kill = false;
+                (UpdateThread = new Thread(Update)).Start();
+            }
         }
 
         /// <summary>
         /// Tells the gameobject to please kill itself
         /// </summary>
         public void Kill()
-            => this.kill = true;
+        {
+            this.started = false;
+            this.kill = true;
+        }
 
         /// <summary>
         /// Adds a component to the list of components,

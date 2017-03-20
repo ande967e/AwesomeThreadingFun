@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using AwesomeThreadingFun.Components;
 
 namespace AwesomeThreadingFun
 {
@@ -16,5 +17,10 @@ namespace AwesomeThreadingFun
     interface IDrawable
     {
         void Draw(SpriteBatch sb);
+    }
+
+    interface IInteractable
+    {
+        void Interact(Truck sender);
     }
 }
