@@ -10,6 +10,7 @@ namespace AwesomeThreadingFun.ShopItems
 {
     class Loadingbay : IInteractable
     {
+        private GameObject interacter;
         private object key = new object();
         private int goods;
 
@@ -18,11 +19,13 @@ namespace AwesomeThreadingFun.ShopItems
 
         public void Interact(Truck t)
         {
+            interacter = t.Gameobject;
             for (int i = 0; i < t.MaxLoad; i++)
             {
                 lock (key) { goods++; }
                 Thread.Sleep(1);
             }
+            interacter = null;
         }
 
         public int GetGoods()
