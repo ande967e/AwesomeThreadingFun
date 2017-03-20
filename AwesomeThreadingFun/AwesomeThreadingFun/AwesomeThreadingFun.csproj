@@ -63,6 +63,7 @@
     <Content Include="Content\Sprites\Bob.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Building.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
