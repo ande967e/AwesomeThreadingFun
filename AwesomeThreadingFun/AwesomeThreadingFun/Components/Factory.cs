@@ -19,8 +19,10 @@ namespace AwesomeThreadingFun.Components
         private int contractTimer; //indicates the amount of time the contract have been active.
         private int spawnSpeed; //the time between trucks are send on it's way.                     --> Miliseconds.
         private int spawnTimer; //indicates the upcounter until next truck spawn.
+        private int maxNumberOfTrucks;
+        private int numberOfTrucks;
 
-        public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int contractTime, int truckOnloadTime) : base(go)
+        public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int contractTime, int truckOnloadTime, int maxNumberOfTrucks) : base(go)
         {
             this.spawnSpeed = spawnSpeed;
             this.truckCargoSize = truckCargoSize;
@@ -28,6 +30,7 @@ namespace AwesomeThreadingFun.Components
             this.truckOnloadTime = truckOnloadTime;
             this.contractTime = contractTime;
             director = new Director(new Truckbuilder(this.Gameobject, this.truckTravelSpeed, this.truckCargoSize, this.truckOnloadTime));
+            this.maxNumberOfTrucks = maxNumberOfTrucks;
 
         }
 
@@ -46,7 +49,7 @@ namespace AwesomeThreadingFun.Components
 
                 //adds a truck if enough time has passed.
                 spawnTimer += time.Milliseconds;
-                if (spawnTimer > spawnSpeed)
+                if (spawnTimer > spawnSpeed && numberOfTrucks < maxNumberOfTrucks)
                 {
                     SpawnTruck();
                     spawnTimer = 0;
@@ -57,11 +60,13 @@ namespace AwesomeThreadingFun.Components
         public void SpawnTruck()
         {
             director.BuildObject();
+            numberOfTrucks++;
         }
 
         public void BuyContract()
         {
             contractAmount++;
+
         }
     }
 }
