@@ -28,14 +28,14 @@ namespace AwesomeThreadingFun.Components
 
         public void Update(TimeSpan ts)
         {
-            Transform.Translate((target.Transform.Position - Transform.Position).Normalized * speed);
-
             if ((curTarget.Transform.Position - Transform.Position).Length < 5)
             {
                 curTarget.Interact(this);
                 Thread.Sleep(100 * unloadTime);
                 curTarget = curTarget == target ? dispenser : target;
             }
+            else
+                Transform.Translate((target.Transform.Position - Transform.Position).Normalized * speed);
         }
     }
 }
