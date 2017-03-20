@@ -4,18 +4,27 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AwesomeThreadingFun
 {
+
+    /*
+     * 
+     * 
+     * Guess what just worked \o/ ~Andreas
+     * 
+     * 
+     */ 
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Gameworld : Game
     {
-        private static Game1 _instance;
-        public static Game1 Instance { get { return _instance == null ? _instance = new Game1() : _instance; } }
+        private static Gameworld _instance;
+        public static Gameworld Instance { get { return _instance == null ? _instance = new Gameworld() : _instance; } }
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Game1()
+        private Gameworld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -30,7 +39,7 @@ namespace AwesomeThreadingFun
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            Other.Picture.Initialize(Content);
             base.Initialize();
         }
 
