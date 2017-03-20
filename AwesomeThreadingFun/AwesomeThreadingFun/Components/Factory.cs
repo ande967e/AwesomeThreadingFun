@@ -9,13 +9,20 @@ namespace AwesomeThreadingFun.Components
 {
     class Factory : Component, IUpdateable, IDrawable
     {
-        private int spawnSpeed;
-        private int truckCargoSize;
-        private int truckTravelSpeed;
+        private int spawnSpeed; //the time between trucks are send on it's way.
+        private int truckCargoSize; //the amount of cargo the truck carries.
+        private int truckTravelSpeed; //the speed of which the truck travels.
+        private int truckOnloadTime; //Time it takes to onload a truck.
+        private int contractTime; //the amount of time the contract holds before it stops.
+        private int contractAmount; //amount of contracts.
 
-        public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed) : base(go)
+        public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int contractTime, int truckOnloadTime) : base(go)
         {
-
+            this.spawnSpeed = spawnSpeed;
+            this.truckCargoSize = truckCargoSize;
+            this.truckTravelSpeed = truckTravelSpeed;
+            this.truckOnloadTime = truckOnloadTime;
+            this.contractTime = contractTime;
         }
 
         public void Draw(SpriteBatch sb)
@@ -31,6 +38,11 @@ namespace AwesomeThreadingFun.Components
         public void SpawnTruck()
         {
 
+        }
+
+        public void BuyContract()
+        {
+            
         }
     }
 }
