@@ -25,11 +25,12 @@ namespace AwesomeThreadingFun
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<GameObject> gos = new List<GameObject>();
+        List<GameObject> gos;
 
 
         private Gameworld()
         {
+            gos = new List<GameObject>();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -43,8 +44,8 @@ namespace AwesomeThreadingFun
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Other.Picture.Initialize(Content);
             base.Initialize();
+            Other.Picture.Initialize(Content);
         }
 
         /// <summary>
@@ -75,7 +76,6 @@ namespace AwesomeThreadingFun
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
         }
 
