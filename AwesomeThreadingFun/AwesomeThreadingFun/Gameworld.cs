@@ -127,7 +127,8 @@ namespace AwesomeThreadingFun
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            for (int i = 0; i < gos.Count; i++)
+                gos[i].Draw(this.spriteBatch);
 
             base.Draw(gameTime);
         }
