@@ -23,4 +23,10 @@ namespace AwesomeThreadingFun
     {
         void Interact(Truck sender);
     }
+
+    interface IBuilder
+    {
+        void BuildGameobject();
+        GameObject GetGameobject();
+    }
 }

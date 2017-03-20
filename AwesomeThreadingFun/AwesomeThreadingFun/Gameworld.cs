@@ -27,9 +27,9 @@ namespace AwesomeThreadingFun
         SpriteBatch spriteBatch;
         List<GameObject> gos;
 
-
         private Gameworld()
         {
+            base.IsMouseVisible = true;
             gos = new List<GameObject>();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

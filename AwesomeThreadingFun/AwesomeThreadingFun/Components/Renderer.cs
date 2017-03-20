@@ -12,7 +12,7 @@ namespace AwesomeThreadingFun.Components
     {
         #region Properties
         public Texture2D Sprite { get; set; }
-        public Rectangle SourceRectangle { private get; set; }
+        public Rectangle SourceRectangle { get; set; }
 
         private Color color;
         #endregion
