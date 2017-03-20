@@ -14,5 +14,11 @@ namespace AwesomeThreadingFun.Builder
         {
             this.builder = builder;
         }
+
+        public GameObject BuildObject()
+        {
+            builder.BuildGameobject();
+            return builder.GetGameobject();
+        }
     }
 }

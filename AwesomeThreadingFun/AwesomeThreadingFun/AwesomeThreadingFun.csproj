@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Builder\Director.cs" />
+    <Compile Include="Builder\Truckbuilder.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Factory.cs" />
