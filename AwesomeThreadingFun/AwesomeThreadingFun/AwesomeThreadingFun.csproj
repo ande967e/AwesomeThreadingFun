@@ -41,6 +41,7 @@
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\Truckbuilder.cs" />
     <Compile Include="Components\Animator.cs" />
+    <Compile Include="Components\BoxCollider.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Factory.cs" />
     <Compile Include="Components\Renderer.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Other\VectorF.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopItems\Loadingbay.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
