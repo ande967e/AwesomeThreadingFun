@@ -43,6 +43,7 @@
     <Compile Include="Components\Factory.cs" />
     <Compile Include="Components\Renderer.cs" />
     <Compile Include="Components\Transform.cs" />
+    <Compile Include="Components\Truck.cs" />
     <Compile Include="EnumList.cs" />
     <Compile Include="Gameworld.cs" />
     <Compile Include="GameObject.cs" />
@@ -63,10 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Sprites\Bob.PNG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Sprites\Building.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
