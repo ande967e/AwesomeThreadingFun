@@ -30,11 +30,26 @@ namespace AwesomeThreadingFun.Components
 
         public void Update(TimeSpan ts)
         {
-            if ((curTarget.Transform.Position - Transform.Position).Length < 5)
+            if ((curTarget.Transform.Position - Transform.Position).Length < reach)
             {
-                curTarget.Interact(this);
-                Thread.Sleep(100 * unloadTime);
-                curTarget = curTarget == target ? dispenser : target;
+                if (curTarget.GetComponent<Shop>() != null)
+                {
+                    ShopItems.Loadingbay lb;
+
+                    if ((lb = curTarget.GetComponent<Shop>().RequestLoadingBay()) == null)
+                        Thread.Sleep(10);
+                    else
+                    {
+                        lb.Interact(this);
+                        curTarget = dispenser;
+                    }
+                }
+                else
+                {
+                    //Interact with dispenser
+
+                    curTarget = target;
+                }
             }
             else
                 Transform.Translate((target.Transform.Position - Transform.Position).Normalized * speed);

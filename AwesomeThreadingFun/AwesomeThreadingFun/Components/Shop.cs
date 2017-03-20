@@ -10,13 +10,12 @@ using AwesomeThreadingFun.ShopItems;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Shop : Component, IUpdateable, IInteractable
+    class Shop : Component, IUpdateable
     {
         private int Stock;
         private int Money;
         new List<Loadingbay> loadingbays;
-
-        
+        private object key = new object();
 
         public Shop (GameObject go) : base (go)
         {
@@ -34,7 +33,7 @@ namespace AwesomeThreadingFun.Components
 
         public Loadingbay RequestLoadingBay()
         {
-            lock{ return loadingbays.Find(l => l.interacter == null); }
+            lock(key) { return loadingbays.Find(l => l.interacter == null); }
         }
 
         /*private void UpdateStock()

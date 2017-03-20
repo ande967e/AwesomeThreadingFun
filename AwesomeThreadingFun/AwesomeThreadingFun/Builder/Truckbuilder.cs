@@ -19,12 +19,12 @@ namespace AwesomeThreadingFun.Builder
         private GameObject go;
 
         public Truckbuilder(GameObject dispenser, int speed, int maxLoad)
-            : this(Gameworld.Instance.GetGameobject(g => g.GetComponent(c => c is IInteractable) != null),
+            : this(Gameworld.Instance.GetGameobject(g => g.GetComponent<Shop>() != null),
                   dispenser, speed, maxLoad, maxLoad/100)
         { }
 
         public Truckbuilder(GameObject dispenser, int speed, int maxLoad, int unloadSpeed)
-            : this(Gameworld.Instance.GetGameobject(g => g.GetComponent(c => c is IInteractable) != null), 
+            : this(Gameworld.Instance.GetGameobject(g => g.GetComponent<Shop>() != null), 
                   dispenser, speed, maxLoad, unloadSpeed)
         { }
 
