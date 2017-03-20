@@ -22,7 +22,7 @@ namespace AwesomeThreadingFun.Other
             images = new Dictionary<string, Texture2D>();
 
             foreach (string s in Directory.GetFiles(@"Content\Sprites"))
-                images.Add(s.Split('\\').Last().Split('.').First(), cm.Load<Texture2D>(s));
+                images.Add(s.Split('\\').Last().Split('.').First(), cm.Load<Texture2D>(s.Remove(0, 8).Split('.').First()));
         }
 
         /// <summary>

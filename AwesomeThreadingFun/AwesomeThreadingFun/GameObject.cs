@@ -14,7 +14,11 @@ namespace AwesomeThreadingFun
     {
         public float Scale;
 
+        public Transform Transform { get; private set; }
+        public Renderer Renderer { get; private set; }
+
         private bool kill;
+        private bool started;
         private Thread UpdateThread;
 
         private List<Component> components;
@@ -23,6 +27,7 @@ namespace AwesomeThreadingFun
         {
             components = new List<Component>();
             this.kill = false;
+            this.started = false;
             Scale = 1;
         }
 
@@ -47,22 +52,47 @@ namespace AwesomeThreadingFun
         {
             while (!kill)
                 components.FindAll(c => c is IUpdateable).ForEach(c => (c as IUpdateable).Update(Gameworld.Instance.MaxElapsedTime));
+
+            Gameworld.Instance.Remove(this);
         }
+
+        public void Interact(Truck sender)
+           => components.FindAll(c => c is IInteractable).ForEach(c => (c as IInteractable).Interact(sender));
 
         /// <summary>
         /// Starts the thread associated with the gameobject
         /// </summary>
         public void Start()
         {
-            this.kill = false;
-            (UpdateThread = new Thread(Update)).Start();
+            if (!this.started)
+            {
+                this.kill = false;
+                (UpdateThread = new Thread(Update)).Start();
+            }
         }
 
         /// <summary>
         /// Tells the gameobject to please kill itself
         /// </summary>
         public void Kill()
-            => this.kill = true;
+        {
+            this.started = false;
+            this.kill = true;
+        }
+
+        /// <summary>
+        /// Adds a component to the list of components,
+        /// </summary>
+        /// <param name="comp">The component to add</param>
+        public void AddComponent(Component comp)
+        {
+            components.Add(comp);
+
+            if (comp is Transform)
+                Transform = comp as Transform;
+            else if (comp is Renderer)
+                Renderer = comp as Renderer;
+        }
 
         /// <summary>
         /// Gets the first occuring component.
