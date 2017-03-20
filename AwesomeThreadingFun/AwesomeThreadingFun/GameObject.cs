@@ -14,6 +14,9 @@ namespace AwesomeThreadingFun
     {
         public float Scale;
 
+        public Transform Transform { get; private set; }
+        public Renderer Renderer { get; private set; }
+
         private bool kill;
         private Thread UpdateThread;
 
@@ -47,6 +50,8 @@ namespace AwesomeThreadingFun
         {
             while (!kill)
                 components.FindAll(c => c is IUpdateable).ForEach(c => (c as IUpdateable).Update(Gameworld.Instance.MaxElapsedTime));
+
+            Gameworld.Instance.Remove(this);
         }
 
         /// <summary>
@@ -63,6 +68,20 @@ namespace AwesomeThreadingFun
         /// </summary>
         public void Kill()
             => this.kill = true;
+
+        /// <summary>
+        /// Adds a component to the list of components,
+        /// </summary>
+        /// <param name="comp">The component to add</param>
+        public void AddComponent(Component comp)
+        {
+            components.Add(comp);
+
+            if (comp is Transform)
+                Transform = comp as Transform;
+            else if (comp is Renderer)
+                Renderer = comp as Renderer;
+        }
 
         /// <summary>
         /// Gets the first occuring component.
