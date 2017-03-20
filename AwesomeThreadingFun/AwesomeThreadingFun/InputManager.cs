@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AwesomeThreadingFun.Other;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AwesomeThreadingFun
 {
-    public static class InputManager
+    static class InputManager
     {
         //Stores the mouse state
         private static MouseState previousMouseState;
@@ -56,6 +57,40 @@ namespace AwesomeThreadingFun
                     break;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Returns true if the given mouse button is pressed.
+        /// </summary>
+        /// <param name="btn"></param>
+        /// <returns></returns>
+        public static bool GetIsMouseButtonPressed(MouseButton btn)
+        {
+            switch (btn)
+            {
+                case MouseButton.Left:
+                    if (currentMouseState.LeftButton == ButtonState.Pressed)
+                        return true;
+                    break;
+                case MouseButton.Middle:
+                    if (currentMouseState.MiddleButton == ButtonState.Pressed)
+                        return true;
+                    break;
+                case MouseButton.Right:
+                    if (currentMouseState.RightButton == ButtonState.Pressed)
+                        return true;
+                    break;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Gets the mouse's position as a Vector.
+        /// </summary>
+        /// <returns></returns>
+        public static Vector GetMousePosition()
+        {
+            return new Vector(currentMouseState.X, currentMouseState.Y);
         }
 
     }
