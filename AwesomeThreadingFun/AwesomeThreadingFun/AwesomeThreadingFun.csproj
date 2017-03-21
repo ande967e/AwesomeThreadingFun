@@ -60,6 +60,8 @@
     <Compile Include="Other\Picture.cs" />
     <Compile Include="Other\Vector.cs" />
     <Compile Include="Other\VectorF.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopItems\Counter.cs" />
