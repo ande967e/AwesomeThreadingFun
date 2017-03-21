@@ -23,18 +23,15 @@ namespace AwesomeThreadingFun
 
         private List<Component> components;
 
-        public GameObject()
+        public GameObject() : this(1)
+        { }
+
+        public GameObject(float scale)
         {
             components = new List<Component>();
             this.kill = false;
             this.started = false;
-            Scale = 1;
-        }
-
-        public GameObject(float scale)
-        {
-            this.kill = false;
-            this.Scale = scale;
+            Scale = scale;
         }
 
         /// <summary>
@@ -51,7 +48,10 @@ namespace AwesomeThreadingFun
         private void Update()
         {
             while (!kill)
+            {
                 components.FindAll(c => c is IUpdateable).ForEach(c => (c as IUpdateable).Update(Gameworld.Instance.MaxElapsedTime));
+                Thread.Sleep(10);
+            }
 
             Gameworld.Instance.Remove(this);
         }
