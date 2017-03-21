@@ -24,14 +24,17 @@ namespace AwesomeThreadingFun
 
         public void LoadContent()
         {
-            this.Gameobject.Renderer.SourceRectangle = new Rectangle(0, 0, this.Gameobject.Renderer.Sprite.Width, 5);
+            //Changes the sliders picture
+            this.Gameobject.Renderer.SourceRectangle = new Rectangle(0, 0, this.Gameobject.Renderer.Sprite.Width, 1);
+            this.Gameobject.Scale *= 10;
 
             //Creates the pointer.
             pointer = new GameObject(1f);
             pointer.AddComponent(new Transform(pointer, VectorF.Zero));
             pointer.AddComponent(new Renderer(pointer, "Building"));
+            pointer.AddComponent(new BoxCollider(pointer));
             pointerCol = pointer.GetComponent<BoxCollider>();
-            pointer.AddComponent(pointerCol);
+            Gameworld.Instance.Add(pointer);
 
             //Places the pointer at the right start position.
             pointer.Transform.Position = this.Gameobject.Transform.Position;

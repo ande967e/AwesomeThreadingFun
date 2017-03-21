@@ -12,10 +12,11 @@ namespace AwesomeThreadingFun.Builder
     class SliderBuilder : IBuilder
     {
         private GameObject go;
+        private Vector position;
 
-        public SliderBuilder(GameObject go)
+        public SliderBuilder(Vector position)
         {
-            this.go = go;
+            this.position = position;
         }
 
         public void BuildGameobject()
@@ -25,6 +26,7 @@ namespace AwesomeThreadingFun.Builder
             go.AddComponent(new Renderer(go, "Building"));
             go.AddComponent(new BoxCollider(go));
             go.AddComponent(new Slider(go));
+            go.Transform.Position = position;
             go.GetComponent<Slider>().LoadContent();
         }
 
