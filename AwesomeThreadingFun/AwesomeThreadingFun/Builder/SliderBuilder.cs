@@ -29,7 +29,6 @@ namespace AwesomeThreadingFun.Builder
             go.AddComponent(new Renderer(go, "Building"));
             go.AddComponent(new BoxCollider(go));
             go.AddComponent(new Slider(go, maxValue));
-            go.Transform.Position = position;
             go.GetComponent<Slider>().LoadContent();
         }
 
