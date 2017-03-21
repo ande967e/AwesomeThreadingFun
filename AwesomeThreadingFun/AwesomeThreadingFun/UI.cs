@@ -31,5 +31,10 @@ namespace AwesomeThreadingFun
         {
             spritebatch.Draw(UITexture, UIRect, Color.White);
         }
+
+        public void CenterElement(int height, int width)
+        {
+            UIRect = new Rectangle((width / 2) - (this.UITexture.Width / 2), (height / 2) - (this.UITexture.Height / 2), this.UITexture.Width, this.UITexture.Height);
+        }
     }
 }
