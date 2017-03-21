@@ -12,14 +12,21 @@ namespace AwesomeThreadingFun.Builder
     {
         private GameObject go;
         private VectorF position;
+        private int cargoSize;
+        private int truckSpeed;
 
-        public FactoryBuilder(VectorF position)
+        public FactoryBuilder() : this(new VectorF(0, 0), 1500, 1)
+        { }
+
+        public FactoryBuilder(VectorF position) : this(position, 1500, 1)
+        { }
+
+        public FactoryBuilder(VectorF position, int cargoSize, int truckSpeed)
         {
             this.position = position;
+            this.cargoSize = cargoSize;
+            this.truckSpeed = truckSpeed;
         }
-
-        public FactoryBuilder() : this(new VectorF(0, 0))
-        { }
 
         public void BuildGameobject()
         {
@@ -27,7 +34,7 @@ namespace AwesomeThreadingFun.Builder
 
             go.AddComponent(new Transform(go, position));
             go.AddComponent(new Renderer(go, "Building"));
-            go.AddComponent(new Factory(go, 1000, 1500, 1, 1000));
+            go.AddComponent(new Factory(go, 1000, cargoSize, truckSpeed, 1000));
             go.AddComponent(new BoxCollider(go));
         }
 

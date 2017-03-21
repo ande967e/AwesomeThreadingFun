@@ -69,7 +69,7 @@
     <Compile Include="ShopItems\Counter.cs" />
     <Compile Include="ShopItems\Contract.cs" />
     <Compile Include="ShopItems\Loadingbay.cs" />
-    <Compile Include="Slider.cs" />
+    <Compile Include="Components\Slider.cs" />
     <Compile Include="UI.cs" />
   </ItemGroup>
   <ItemGroup>
