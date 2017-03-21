@@ -240,3 +240,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/AwesomeThreadingFun/AwesomeThreadingFun/Builder/ShopBuilder.cs
+/AwesomeThreadingFun/AwesomeThreadingFun/Builder/FactoryBuilder.cs
+/AwesomeThreadingFun/AwesomeThreadingFun/Builder
