@@ -98,7 +98,7 @@ namespace AwesomeThreadingFun
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            IsMouseVisible = true;
+            
 
             // TODO: Add your update logic here
 

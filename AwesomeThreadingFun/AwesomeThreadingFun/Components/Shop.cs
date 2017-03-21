@@ -35,18 +35,5 @@ namespace AwesomeThreadingFun.Components
         {
             lock(key) { return loadingbays.Find(l => l.interacter == null); }
         }
-
-        /*private void UpdateStock()
-        {
-            if ()
-            {
-
-            }
-
-            if ()
-            {
-
-            }
-        }*/
     }
 }
