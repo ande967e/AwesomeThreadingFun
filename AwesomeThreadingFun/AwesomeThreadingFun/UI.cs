@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 
 namespace AwesomeThreadingFun
@@ -16,6 +17,9 @@ namespace AwesomeThreadingFun
         private Rectangle UIRect;
         private string assetName;
 
+        public delegate void ElementClicked(string element);
+        public event ElementClicked clickEvent;
+
         public UI(string assetName)
         {
             this.assetName = assetName;
@@ -25,6 +29,14 @@ namespace AwesomeThreadingFun
         {
             UITexture = content.Load<Texture2D>(assetName);
             UIRect = new Rectangle(0, 0, UITexture.Width, UITexture.Height);
+        }
+
+        public void Update()
+        {
+            if(UIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                clickEvent(assetName);
+            }
         }
 
         public void Draw(SpriteBatch spritebatch)

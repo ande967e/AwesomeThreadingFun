@@ -49,7 +49,7 @@ namespace AwesomeThreadingFun
             // TODO: Add your initialization logic here
             base.Initialize();
             Other.Picture.Initialize(Content);
-
+            
             GameObject Factory;
 
             Add(new Director(new ShopBuilder()).BuildObject());
