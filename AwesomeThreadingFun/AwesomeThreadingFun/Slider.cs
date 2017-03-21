@@ -11,14 +11,24 @@ namespace AwesomeThreadingFun
 {
     class Slider : Component, IUpdateable
     {
-        private int procent;
         private BoxCollider pointerCol;
         private GameObject pointer;
         private bool pointMove;
+        private int maxValue;
 
-        public Slider(GameObject go) : base(go)
+        public int GetCurrentValue
+        {
+            get
+            {
+                return maxValue * (int)((pointer.Transform.Position.X - this.Gameobject.Transform.Position.X) /
+                    (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width));
+            }
+        }
+
+        public Slider(GameObject go, int maxValue) : base(go)
         {
             pointMove = false;
+            this.maxValue = maxValue;
         }
 
 
@@ -37,16 +47,13 @@ namespace AwesomeThreadingFun
             Gameworld.Instance.Add(pointer);
 
             //Places the pointer at the right start position.
-            pointer.Transform.Position = this.Gameobject.Transform.Position;
+            pointer.Transform.Position = new Vector(this.Gameobject.Transform.Position);
         }
 
         public void Update(TimeSpan time)
         {
             //Moves the pointer
             MovePointer();
-
-            //Updates the procent value with which the pointer points at.
-            procent = (int)(pointerCol.CollisionRectangle.X - this.Gameobject.Transform.Position.X);
         }
 
         public void MovePointer()
@@ -61,8 +68,9 @@ namespace AwesomeThreadingFun
                 pointer.Transform.Position.X = InputManager.GetMousePosition().X;
 
                 //Makes sure the pointer doesn't move beyound the slider, in both the right and left direction.
-                if (pointer.Transform.Position.X > (this.Gameobject.Transform.Position.X + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width))
-                    pointer.Transform.Position.X = this.Gameobject.Transform.Position.X + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width;
+                if (pointer.Transform.Position.X > (this.Gameobject.Transform.Position.X + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width - pointerCol.CollisionRectangle.Width))
+                    pointer.Transform.Position.X = this.Gameobject.Transform.Position.X + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width
+                        - pointerCol.CollisionRectangle.Width;
                 else if (pointer.Transform.Position.X < this.Gameobject.Transform.Position.X)
                     pointer.Transform.Position.X = this.Gameobject.Transform.Position.X;
             }
