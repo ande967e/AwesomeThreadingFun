@@ -85,6 +85,7 @@ namespace AwesomeThreadingFun.Components
             {
                 if (InputManager.GetIsMouseButtonReleased(MouseButton.Left))
                 {
+                    //If mouse hovers over, and button is released
                     contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
                     Renderer.Color = Microsoft.Xna.Framework.Color.White;
                 }

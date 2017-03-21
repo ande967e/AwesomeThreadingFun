@@ -6,6 +6,5 @@ using System.Threading.Tasks;
 
 namespace AwesomeThreadingFun
 {
-    public enum MouseButton { Left, Middle, Right}
-    public enum ButtonType { LoadingbayUpgrade, CounterUpgrade, StorageUpgrade }
+    delegate void ButtonPress(ButtonType type);
 }
