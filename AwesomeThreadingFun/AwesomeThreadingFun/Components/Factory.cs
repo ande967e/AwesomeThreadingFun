@@ -73,7 +73,7 @@ namespace AwesomeThreadingFun.Components
         public void CheckAndBuyContract()
         {
             if(this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Contains(InputManager.GetMouseBounds()) &&
-                InputManager.GetIsMouseButtonReleased(MouseButton.Left))
+                InputManager.GetHasMouseButtonBeenReleased(MouseButton.Left))
             {
                 contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
             }

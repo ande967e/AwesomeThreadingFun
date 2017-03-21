@@ -41,6 +41,7 @@
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\FactoryBuilder.cs" />
     <Compile Include="Builder\ShopBuilder.cs" />
+    <Compile Include="Builder\SliderBuilder.cs" />
     <Compile Include="Builder\Truckbuilder.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\BoxCollider.cs" />

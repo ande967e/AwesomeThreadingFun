@@ -52,7 +52,7 @@ namespace AwesomeThreadingFun
             Add(new Director(new ShopBuilder()   ).BuildObject());
 
             GetGameobject(g => g.GetComponent<Components.Factory>() != null)
-                .GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 2000000));
+                .GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 20000));
         }
 
         /// <summary>
