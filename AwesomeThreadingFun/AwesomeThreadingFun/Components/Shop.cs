@@ -20,6 +20,7 @@ namespace AwesomeThreadingFun.Components
         public Shop (GameObject go) : base (go)
         {
             loadingbays = new List<Loadingbay>();
+            ButtonEventHandler.SubscribeToEvent(ButtonHandler);
 
             for (int i = 0; i < 5; i++)
                 loadingbays.Add(new Loadingbay());
@@ -37,6 +38,16 @@ namespace AwesomeThreadingFun.Components
         {
             lock(key) {
                 return loadingbays.Find(l => l.interacter == null);
+            }
+        }
+
+        private void ButtonHandler(ButtonType type)
+        {
+            switch(type)
+            {
+                case ButtonType.LoadingbayUpgrade:
+                    loadingbays.Add(new Loadingbay());
+                    break;
             }
         }
     }
