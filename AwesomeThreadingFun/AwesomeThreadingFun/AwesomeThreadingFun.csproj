@@ -54,7 +54,7 @@
     <Compile Include="Components\Truck.cs" />
     <Compile Include="DelegateList.cs" />
     <Compile Include="EnumList.cs" />
-    <Compile Include="EventHandler.cs" />
+    <Compile Include="ButtonEventHandler.cs" />
     <Compile Include="Gameworld.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="InputManager.cs" />

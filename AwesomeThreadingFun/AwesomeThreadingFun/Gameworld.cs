@@ -49,6 +49,7 @@ namespace AwesomeThreadingFun
             // TODO: Add your initialization logic here
             base.Initialize();
             Other.Picture.Initialize(Content);
+            ButtonEventHandler.Initialize();
 
             GameObject Factory;
 
@@ -64,6 +65,9 @@ namespace AwesomeThreadingFun
             */
             Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height - 10))).BuildObject();
             Add(Factory);
+
+            Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, new Other.VectorF(
+                GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2))).BuildObject());
         }
 
         /// <summary>
