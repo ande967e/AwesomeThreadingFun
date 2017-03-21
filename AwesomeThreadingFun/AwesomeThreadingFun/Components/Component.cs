@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Component
+    abstract class Component
     {
         public GameObject Gameobject;
         public Transform Transform { get { return Gameobject.Transform; } }

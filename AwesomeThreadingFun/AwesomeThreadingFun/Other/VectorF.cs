@@ -67,6 +67,11 @@ namespace AwesomeThreadingFun.Other
             this.X = X;
             this.Y = Y;
         }
+        public VectorF(VectorF vec)
+        {
+            this.X = vec.X;
+            this.Y = vec.Y;
+        }
         #endregion
     }
 }
