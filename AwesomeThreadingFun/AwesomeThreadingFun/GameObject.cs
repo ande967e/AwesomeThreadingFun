@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using AwesomeThreadingFun.Components;
+using AwesomeThreadingFun.ShopItems;
 
 namespace AwesomeThreadingFun
 {
@@ -49,15 +50,12 @@ namespace AwesomeThreadingFun
         {
             while (!kill)
             {
-                components.FindAll(c => c is IUpdateable).ForEach(c => (c as IUpdateable).Update(Gameworld.Instance.MaxElapsedTime));
+                components.FindAll(c => c is IUpdateable).ForEach(c => (c as IUpdateable).Update(new TimeSpan(0,0,0,0,10)));
                 Thread.Sleep(10);
             }
 
             Gameworld.Instance.Remove(this);
         }
-
-        public void Interact(Truck sender)
-           => components.FindAll(c => c is IInteractable).ForEach(c => (c as IInteractable).Interact(sender));
 
         /// <summary>
         /// Starts the thread associated with the gameobject

@@ -36,7 +36,7 @@ namespace AwesomeThreadingFun.Components
                 {
                     ShopItems.Loadingbay lb;
 
-                    if ((lb = curTarget.GetComponent<Shop>().RequestLoadingBay()) == null)
+                    if ((lb = (curTarget.GetComponent(c => c is IInteractable) as IInteractable).Interact()) == null)
                         return;
                     else
                     {
@@ -46,7 +46,7 @@ namespace AwesomeThreadingFun.Components
                 }
                 else
                 {
-                    //Interact with dispenser
+                    (curTarget.GetComponent(c => c is IInteractable) as IInteractable).Interact().Interact(this);
 
                     curTarget = target;
                 }

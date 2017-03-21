@@ -9,7 +9,7 @@ using AwesomeThreadingFun.ShopItems;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Factory : Component, IUpdateable
+    class Factory : Component, IUpdateable, IInteractable
     {
         private int truckCargoSize; //the amount of cargo the truck carries.
         private int truckTravelSpeed; //the speed of which the truck travels.
@@ -57,10 +57,16 @@ namespace AwesomeThreadingFun.Components
 
                     //If the contracts time has been exceeded it will be removed.
                     if (c.ContractTimer >= c.ContractTime)
+                    {
+                        c.DestroyContract();
                         contracts.Remove(c);
+                    }
                 }
             }  
         }
+
+        public Loadingbay Interact()
+            => new Loadingbay();
 
         public void SpawnTruck(Contract c)
         {
@@ -68,6 +74,7 @@ namespace AwesomeThreadingFun.Components
             truck.Transform.Position = this.Transform.Position;
             Gameworld.Instance.Add(truck);
             c.NumberOfTrucks++;
+            c.AddTruck(truck.GetComponent<Truck>());
         }
 
         public void CheckAndBuyContract()
