@@ -48,5 +48,10 @@ namespace AwesomeThreadingFun
         {
             UIRect = new Rectangle((width / 2) - (this.UITexture.Width / 2), (height / 2) - (this.UITexture.Height / 2), this.UITexture.Width, this.UITexture.Height);
         }
+
+        public void MoveElement(int x, int y)
+        {
+            UIRect = new Rectangle(UIRect.X += x, UIRect.Y += y, UIRect.Width, UIRect.Height);
+        }
     }
 }
