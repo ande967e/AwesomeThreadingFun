@@ -83,7 +83,7 @@ namespace AwesomeThreadingFun.Components
         {
             if (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Contains(InputManager.GetMouseBounds()))
             {
-                if (InputManager.GetIsMouseButtonReleased(MouseButton.Left))
+                if (InputManager.GetHasMouseButtonBeenReleased(MouseButton.Left))
                 {
                     //If mouse hovers over, and button is released
                     contracts.Add(new Contract(maxNumberOfTrucks, contractTime));

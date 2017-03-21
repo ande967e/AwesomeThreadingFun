@@ -21,7 +21,7 @@ namespace AwesomeThreadingFun.Components
         {
             if (col.CollisionRectangle.Contains(InputManager.GetMouseBounds()))
             {
-                if (InputManager.GetIsMouseButtonReleased(MouseButton.Left))
+                if (InputManager.GetHasMouseButtonBeenReleased(MouseButton.Left))
                     ButtonEventHandler.FireEvent(type);
                 else if (InputManager.GetIsMouseButtonPressed(MouseButton.Left))
                     Renderer.Color = Microsoft.Xna.Framework.Color.DarkRed;

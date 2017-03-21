@@ -66,9 +66,8 @@ namespace AwesomeThreadingFun
             Add(Factory);
 
             GameObject slider;
-            slider = new Director(new SliderBuilder(new Other.Vector(100, 100))).BuildObject();
+            slider = new Director(new SliderBuilder(new Other.Vector(100, 100), 100)).BuildObject();
             Add(slider);
-
         }
 
         /// <summary>
