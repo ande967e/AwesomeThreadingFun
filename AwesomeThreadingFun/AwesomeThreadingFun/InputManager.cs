@@ -31,7 +31,7 @@ namespace AwesomeThreadingFun
         /// <returns></returns>
         public static Rectangle GetMouseBounds()
         {
-            return new Rectangle(currentMouseState.X, currentMouseState.Y, 1, 1);
+            return new Rectangle(currentMouseState.Position.X, currentMouseState.Position.Y, 10, 10);
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace AwesomeThreadingFun.Components
         public Texture2D Sprite { get; set; }
         public Rectangle SourceRectangle { get; set; }
 
-        private Color color;
+        public Color Color { get; set; }
         #endregion
 
         #region Constructors
@@ -34,7 +34,7 @@ namespace AwesomeThreadingFun.Components
             : base(go)
         {
             this.Sprite = texture;
-            this.color = color;
+            this.Color = color;
             this.SourceRectangle = new Rectangle(0, 0, Sprite.Width, Sprite.Height);
         }
 
@@ -54,7 +54,7 @@ namespace AwesomeThreadingFun.Components
         {
             this.Sprite = texture;
             this.SourceRectangle = sourceRectangle;
-            this.color = color;
+            this.Color = color;
         }
         #endregion
 
@@ -62,7 +62,7 @@ namespace AwesomeThreadingFun.Components
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(Sprite, new Rectangle((Point)Transform.Position, new Point((int)(SourceRectangle.Width * Gameobject.Scale), 
-                (int)(SourceRectangle.Height * Gameobject.Scale))), Color.White);
+                (int)(SourceRectangle.Height * Gameobject.Scale))), Color);
         }
         #endregion
     }
