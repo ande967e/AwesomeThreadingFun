@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using AwesomeThreadingFun.Builder;
 
 namespace AwesomeThreadingFun
 {
@@ -46,6 +47,12 @@ namespace AwesomeThreadingFun
             // TODO: Add your initialization logic here
             base.Initialize();
             Other.Picture.Initialize(Content);
+
+            Add(new Director(new FactoryBuilder()).BuildObject());
+            Add(new Director(new ShopBuilder()   ).BuildObject());
+
+            GetGameobject(g => g.GetComponent<Components.Factory>() != null)
+                .GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 2000000));
         }
 
         /// <summary>
@@ -129,8 +136,10 @@ namespace AwesomeThreadingFun
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
             for (int i = 0; i < gos.Count; i++)
                 gos[i].Draw(this.spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
