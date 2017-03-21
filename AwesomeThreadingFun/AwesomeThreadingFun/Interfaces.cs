@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using AwesomeThreadingFun.Components;
+using AwesomeThreadingFun.ShopItems;
 
 namespace AwesomeThreadingFun
 {
@@ -21,7 +22,7 @@ namespace AwesomeThreadingFun
 
     interface IInteractable
     {
-        void Interact(Truck sender);
+        Loadingbay Interact();
     }
 
     interface IBuilder
