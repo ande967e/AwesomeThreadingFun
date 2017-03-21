@@ -26,6 +26,7 @@ namespace AwesomeThreadingFun.Components
 
         public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int truckOnloadTime) : base(go)
         {
+            this.contracts = new List<Contract>();
             this.spawnSpeed = spawnSpeed;
             this.truckCargoSize = truckCargoSize;
             this.truckTravelSpeed = truckTravelSpeed;
@@ -42,8 +43,9 @@ namespace AwesomeThreadingFun.Components
             if (contracts.Count > 0)
             {
                 //runs through all the contrats in the list contracts
-                foreach(Contract c in contracts)
+                for(int i = 0; i < contracts.Count; i++)
                 {
+                    Contract c = contracts[i];
                     //adds to the contract's time it has been alive.
                     c.ContractTimer += time.Milliseconds;
 
@@ -62,7 +64,9 @@ namespace AwesomeThreadingFun.Components
 
         public void SpawnTruck(Contract c)
         {
-            director.BuildObject();
+            GameObject truck = director.BuildObject();
+            truck.Transform.Position = this.Transform.Position;
+            Gameworld.Instance.Add(truck);
             c.NumberOfTrucks++;
         }
 
@@ -74,5 +78,8 @@ namespace AwesomeThreadingFun.Components
                 contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
             }
         }
+
+        public void AddContract(Contract contract)
+            => contracts.Add(contract);
     }
 }

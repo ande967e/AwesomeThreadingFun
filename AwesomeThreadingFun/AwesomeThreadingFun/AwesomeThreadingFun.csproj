@@ -39,6 +39,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Builder\Director.cs" />
+    <Compile Include="Builder\FactoryBuilder.cs" />
+    <Compile Include="Builder\ShopBuilder.cs" />
     <Compile Include="Builder\Truckbuilder.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\BoxCollider.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="ShopItems\Counter.cs" />
     <Compile Include="ShopItems\Contract.cs" />
     <Compile Include="ShopItems\Loadingbay.cs" />
+    <Compile Include="Slider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
