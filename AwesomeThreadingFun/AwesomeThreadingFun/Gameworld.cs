@@ -49,11 +49,12 @@ namespace AwesomeThreadingFun
             // TODO: Add your initialization logic here
             base.Initialize();
             Other.Picture.Initialize(Content);
-            
+            ButtonEventHandler.Initialize();
+
             GameObject Factory;
 
             Add(new Director(new ShopBuilder()).BuildObject());
-
+            /*
             Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height))).BuildObject();
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 200000));
             Add(Factory);
@@ -61,7 +62,12 @@ namespace AwesomeThreadingFun
             Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, 0))).BuildObject();
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(10, 5000000));
             Add(Factory);
+            */
+            Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height - 10))).BuildObject();
+            Add(Factory);
 
+            Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, new Other.VectorF(
+                GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2))).BuildObject());
             Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height))).BuildObject();
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(50, 100000));
             Add(Factory);
@@ -122,7 +128,7 @@ namespace AwesomeThreadingFun
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            
+            InputManager.Update(gameTime.TotalGameTime);
 
             // TODO: Add your update logic here
 
