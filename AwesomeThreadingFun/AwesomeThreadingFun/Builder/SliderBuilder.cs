@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AwesomeThreadingFun.Components;
 
 namespace AwesomeThreadingFun.Builder
 {
@@ -24,7 +25,7 @@ namespace AwesomeThreadingFun.Builder
         public void BuildGameobject()
         {
             go = new GameObject(1);
-            go.AddComponent(new Transform(go, VectorF.Zero));
+            go.AddComponent(new Transform(go, position));
             go.AddComponent(new Renderer(go, "Building"));
             go.AddComponent(new BoxCollider(go));
             go.AddComponent(new Slider(go, maxValue));

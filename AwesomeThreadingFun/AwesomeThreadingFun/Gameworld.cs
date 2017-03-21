@@ -63,15 +63,11 @@ namespace AwesomeThreadingFun
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(10, 5000000));
             Add(Factory);
             
-            Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height - 10), 500, 3)).BuildObject();
+            Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height - 200), 500, 3)).BuildObject();
             Add(Factory);
 
             Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, new Other.VectorF(
                 GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2))).BuildObject());
-
-            GameObject slider;
-            slider = new Director(new SliderBuilder(new Other.Vector(100, 100), 100)).BuildObject();
-            Add(slider);
         }
 
         /// <summary>

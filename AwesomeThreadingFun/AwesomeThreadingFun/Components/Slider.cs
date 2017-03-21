@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AwesomeThreadingFun
+namespace AwesomeThreadingFun.Components
 {
     class Slider : Component, IUpdateable
     {
