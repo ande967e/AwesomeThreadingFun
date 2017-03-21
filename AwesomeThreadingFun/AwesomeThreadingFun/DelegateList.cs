@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace AwesomeThreadingFun
 {
-    public enum MouseButton { Left, Middle, Right}
-    public enum ButtonType { LoadingbayUpgrade, CounterUpgrade, StorageUpgrade, ContractBuy }
+    delegate void ButtonPress(ButtonType type);
+    delegate void AdvancedButtonPress(ButtonType type, GameObject Sender);
 }

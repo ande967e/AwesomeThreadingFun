@@ -15,6 +15,9 @@ namespace AwesomeThreadingFun
         private static MouseState previousMouseState;
         private static MouseState currentMouseState;
 
+        public static MouseState PreviousMouseState { get { return previousMouseState; } }
+        public static MouseState CurrentMouseState { get { return currentMouseState; } }
+
         /// <summary>
         /// Updates the states so that they contain the right data.
         /// </summary>
@@ -26,20 +29,29 @@ namespace AwesomeThreadingFun
         }
 
         /// <summary>
-        /// Returns a small rectangle at the mouse's location.
+        /// Returns a small rectangle at the mouse's current location.
         /// </summary>
         /// <returns></returns>
         public static Rectangle GetMouseBounds()
         {
-            return new Rectangle(currentMouseState.X, currentMouseState.Y, 1, 1);
+            return new Rectangle(currentMouseState.Position.X, currentMouseState.Position.Y, 10, 10);
         }
 
         /// <summary>
-        /// Returns a booltrue if the given mouse button is released.
+        /// Returns a small rectangle at the mouse's previous location.
+        /// </summary>
+        /// <returns></returns>
+        public static Rectangle GetMouseBoundsAtPrevLocation()
+        {
+            return new Rectangle(previousMouseState.X, previousMouseState.Y, 1, 1);
+        }
+
+        /// <summary>
+        /// Returns a bool true if the given mouse button is released after it was pressed.
         /// </summary>
         /// <param name="btn"></param>
         /// <returns></returns>
-        public static bool GetIsMouseButtonReleased(MouseButton btn)
+        public static bool GetHasMouseButtonBeenReleased(MouseButton btn)
         {
             switch(btn)
             {
@@ -78,6 +90,31 @@ namespace AwesomeThreadingFun
                     break;
                 case MouseButton.Right:
                     if (currentMouseState.RightButton == ButtonState.Pressed)
+                        return true;
+                    break;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if the given mouse button was pressed.
+        /// </summary>
+        /// <param name="btn"></param>
+        /// <returns></returns>
+        public static bool GetWasMouseButtonPressed(MouseButton btn)
+        {
+            switch (btn)
+            {
+                case MouseButton.Left:
+                    if (previousMouseState.LeftButton == ButtonState.Pressed)
+                        return true;
+                    break;
+                case MouseButton.Middle:
+                    if (previousMouseState.MiddleButton == ButtonState.Pressed)
+                        return true;
+                    break;
+                case MouseButton.Right:
+                    if (previousMouseState.RightButton == ButtonState.Pressed)
                         return true;
                     break;
             }

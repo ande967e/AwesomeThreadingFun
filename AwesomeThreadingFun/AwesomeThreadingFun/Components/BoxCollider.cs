@@ -11,7 +11,7 @@ namespace AwesomeThreadingFun.Components
     {
         public Rectangle CollisionRectangle { get
             {
-                return new Rectangle(0, 0, (int)(Renderer.SourceRectangle.Width * Gameobject.Scale), 
+                return new Rectangle((int)Transform.Position.X, (int)Transform.Position.Y, (int)(Renderer.SourceRectangle.Width * Gameobject.Scale), 
                     (int)(Renderer.SourceRectangle.Height * Gameobject.Scale));
             } }
 

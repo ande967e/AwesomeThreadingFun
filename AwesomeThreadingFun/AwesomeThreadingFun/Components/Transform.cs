@@ -17,6 +17,9 @@ namespace AwesomeThreadingFun.Components
         }
 
         public void Translate(VectorF v)
-            => this.Position += v;
+        {
+            if (!v.IsNaN)
+                Position += v;
+        }
     }
 }

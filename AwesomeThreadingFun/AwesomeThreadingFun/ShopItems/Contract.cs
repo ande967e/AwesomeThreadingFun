@@ -18,11 +18,22 @@ namespace AwesomeThreadingFun.ShopItems
         public int MaxNumberOfTrucks { get { return maxNumberOfTrucks; } }
         public int ContractTime { get { return contractTime; } }
 
+        public List<Components.Truck> Trucks;
 
         public Contract(int maxNumberOfTrucks, int contractTime)
         {
+            Trucks = new List<Components.Truck>();
             this.contractTime = contractTime;
             this.maxNumberOfTrucks = maxNumberOfTrucks;
+        }
+
+        public void AddTruck(Components.Truck truck)
+            => Trucks.Add(truck);
+
+        public void DestroyContract()
+        {
+            foreach (Components.Truck truck in Trucks)
+                truck.Gameobject.Kill();
         }
     }
 }

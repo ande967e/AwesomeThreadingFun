@@ -55,6 +55,7 @@ namespace AwesomeThreadingFun.Other
         public float X { get; set; }
         public float Y { get; set; }
         public float Length { get { return (float)Math.Sqrt(X * X + Y * Y); } }
+        public bool IsNaN { get { return float.IsNaN(X + Y); } }
         public VectorF Normalized { get { return new VectorF(X / Length, Y / Length); } }
         public static VectorF Zero { get { return new VectorF(0, 0); } }
         #endregion
@@ -65,6 +66,11 @@ namespace AwesomeThreadingFun.Other
         {
             this.X = X;
             this.Y = Y;
+        }
+        public VectorF(VectorF vec)
+        {
+            this.X = vec.X;
+            this.Y = vec.Y;
         }
         #endregion
     }

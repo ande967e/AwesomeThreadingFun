@@ -21,7 +21,7 @@ namespace AwesomeThreadingFun.Components
         public Truck(GameObject go, GameObject target, GameObject dispenser, int maxLoad, int speed, int unloadTime)
             : base(go)
         {
-            this.target = this.curTarget = target;
+            this.target = this.curTarget = (target == null ? Gameworld.Instance.GetGameobject(g => g.GetComponent<Shop>() != null) : target);
             this.dispenser = dispenser;
             this.MaxLoad = maxLoad;
             this.speed = speed;
@@ -36,8 +36,8 @@ namespace AwesomeThreadingFun.Components
                 {
                     ShopItems.Loadingbay lb;
 
-                    if ((lb = curTarget.GetComponent<Shop>().RequestLoadingBay()) == null)
-                        Thread.Sleep(10);
+                    if ((lb = (curTarget.GetComponent(c => c is IInteractable) as IInteractable).Interact()) == null)
+                        return;
                     else
                     {
                         lb.Interact(this);
@@ -46,13 +46,13 @@ namespace AwesomeThreadingFun.Components
                 }
                 else
                 {
-                    //Interact with dispenser
+                    (curTarget.GetComponent(c => c is IInteractable) as IInteractable).Interact().Interact(this);
 
                     curTarget = target;
                 }
             }
             else
-                Transform.Translate((target.Transform.Position - Transform.Position).Normalized * speed);
+                Transform.Translate((curTarget.Transform.Position - Transform.Position).Normalized * speed);
         }
     }
 }
