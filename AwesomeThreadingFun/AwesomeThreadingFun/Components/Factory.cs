@@ -23,6 +23,9 @@ namespace AwesomeThreadingFun.Components
         private int maxNumberOfTrucks;
         private int contractTime; //the amount of time the contract holds before it stops.          --> Miliseconds.
 
+        //Sliders
+        private GameObject trucksContract;
+        private GameObject timeContract;
 
         public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int truckOnloadTime) : base(go)
         {
@@ -34,6 +37,13 @@ namespace AwesomeThreadingFun.Components
             director = new Director(new Truckbuilder(this.Gameobject, this.truckTravelSpeed, this.truckCargoSize, this.truckOnloadTime));
             this.maxNumberOfTrucks = 10;
             this.contractTime = 10000;
+
+            //Adds slider for number of trucks
+            trucksContract = new Director(new SliderBuilder(
+                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y - 20), 100)).BuildObject();
+            //Adds slider for contract time
+            timeContract = new Director(new SliderBuilder(
+                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y + 20), 100)).BuildObject();
 
             ButtonEventHandler.SubscribeToEvent(ButtonHandler);
         }
@@ -88,7 +98,7 @@ namespace AwesomeThreadingFun.Components
                 if (InputManager.GetHasMouseButtonBeenReleased(MouseButton.Left))
                 {
                     //If mouse hovers over, and button is released
-                    contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
+                    contracts.Add(new Contract(trucksContract.GetComponent<Slider>().GetCurrentValue, timeContract.GetComponent<Slider>().GetCurrentValue));
                     Renderer.Color = Microsoft.Xna.Framework.Color.White;
                 }
                 else if (InputManager.GetIsMouseButtonPressed(MouseButton.Left))
