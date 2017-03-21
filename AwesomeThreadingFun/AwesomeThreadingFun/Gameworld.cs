@@ -21,6 +21,8 @@ namespace AwesomeThreadingFun
     /// </summary>
     class Gameworld : Game
     {
+        private object key = new object();
+
         private static Gameworld _instance;
         public static Gameworld Instance { get { return _instance == null ? _instance = new Gameworld() : _instance; } }
 
@@ -47,12 +49,22 @@ namespace AwesomeThreadingFun
             // TODO: Add your initialization logic here
             base.Initialize();
             Other.Picture.Initialize(Content);
+            
+            GameObject Factory;
 
-            Add(new Director(new FactoryBuilder()).BuildObject());
-            Add(new Director(new ShopBuilder()   ).BuildObject());
+            Add(new Director(new ShopBuilder()).BuildObject());
 
-            GetGameobject(g => g.GetComponent<Components.Factory>() != null)
-                .GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 20000));
+            Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height))).BuildObject();
+            Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 200000));
+            Add(Factory);
+
+            Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, 0))).BuildObject();
+            Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(10, 5000000));
+            Add(Factory);
+
+            Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height))).BuildObject();
+            Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(50, 100000));
+            Add(Factory);
         }
 
         /// <summary>
@@ -61,7 +73,7 @@ namespace AwesomeThreadingFun
         /// <param name="go">The gameobject to add</param>
         public void Add(GameObject go)
         {
-            gos.Add(go);
+            lock (key) { gos.Add(go); }
             go.Start();
         }
 
@@ -71,7 +83,7 @@ namespace AwesomeThreadingFun
         /// <param name="go">the gameobject to remove</param>
         public void Remove(GameObject go)
         {
-            gos.Remove(go);
+            lock (key) { gos.Remove(go); }
             go.Kill();
         }
 
@@ -105,7 +117,7 @@ namespace AwesomeThreadingFun
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            IsMouseVisible = true;
+            
 
             // TODO: Add your update logic here
 
@@ -137,8 +149,11 @@ namespace AwesomeThreadingFun
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            for (int i = 0; i < gos.Count; i++)
-                gos[i].Draw(this.spriteBatch);
+            lock (key)
+            {
+                for (int i = 0; i < gos.Count; i++)
+                    gos[i].Draw(this.spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

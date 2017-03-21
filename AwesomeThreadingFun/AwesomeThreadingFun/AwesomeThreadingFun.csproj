@@ -66,6 +66,7 @@
     <Compile Include="ShopItems\Contract.cs" />
     <Compile Include="ShopItems\Loadingbay.cs" />
     <Compile Include="Slider.cs" />
+    <Compile Include="UI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

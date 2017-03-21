@@ -8,7 +8,7 @@ using AwesomeThreadingFun.Components;
 
 namespace AwesomeThreadingFun.ShopItems
 {
-    class Loadingbay : IInteractable
+    class Loadingbay
     {
         public GameObject interacter;
         private object key = new object();
