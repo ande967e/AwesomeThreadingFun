@@ -32,6 +32,8 @@ namespace AwesomeThreadingFun.Components
             this.truckTravelSpeed = truckTravelSpeed;
             this.truckOnloadTime = truckOnloadTime;
             director = new Director(new Truckbuilder(this.Gameobject, this.truckTravelSpeed, this.truckCargoSize, this.truckOnloadTime));
+            this.maxNumberOfTrucks = 10;
+            this.contractTime = 10000;
         }
 
         public void Update(TimeSpan time)
@@ -79,11 +81,21 @@ namespace AwesomeThreadingFun.Components
 
         public void CheckAndBuyContract()
         {
-            if(this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Contains(InputManager.GetMouseBounds()) &&
-                InputManager.GetIsMouseButtonReleased(MouseButton.Left))
+            if (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Contains(InputManager.GetMouseBounds()))
             {
-                contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
+                if (InputManager.GetIsMouseButtonReleased(MouseButton.Left))
+                {
+                    //If mouse hovers over, and button is released
+                    contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
+                    Renderer.Color = Microsoft.Xna.Framework.Color.White;
+                }
+                else if (InputManager.GetIsMouseButtonPressed(MouseButton.Left))
+                    Renderer.Color = Microsoft.Xna.Framework.Color.Blue;
+                else
+                    Renderer.Color = Microsoft.Xna.Framework.Color.DarkRed;
             }
+            else
+                Renderer.Color = Microsoft.Xna.Framework.Color.White;
         }
 
         public void AddContract(Contract contract)
