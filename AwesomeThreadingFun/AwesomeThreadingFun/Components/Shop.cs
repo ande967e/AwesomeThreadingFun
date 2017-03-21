@@ -48,6 +48,10 @@ namespace AwesomeThreadingFun.Components
                 case ButtonType.LoadingbayUpgrade:
                     loadingbays.Add(new Loadingbay());
                     break;
+                case ButtonType.CounterUpgrade:
+                    break;
+                case ButtonType.StorageUpgrade:
+                    break;
             }
         }
     }

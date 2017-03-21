@@ -54,7 +54,7 @@ namespace AwesomeThreadingFun
             GameObject Factory;
 
             Add(new Director(new ShopBuilder()).BuildObject());
-            /*
+            
             Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height))).BuildObject();
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 200000));
             Add(Factory);
@@ -62,7 +62,7 @@ namespace AwesomeThreadingFun
             Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, 0))).BuildObject();
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(10, 5000000));
             Add(Factory);
-            */
+            
             Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height - 10))).BuildObject();
             Add(Factory);
 

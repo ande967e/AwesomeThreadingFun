@@ -34,6 +34,8 @@ namespace AwesomeThreadingFun.Components
             director = new Director(new Truckbuilder(this.Gameobject, this.truckTravelSpeed, this.truckCargoSize, this.truckOnloadTime));
             this.maxNumberOfTrucks = 10;
             this.contractTime = 10000;
+
+            ButtonEventHandler.SubscribeToEvent(ButtonHandler);
         }
 
         public void Update(TimeSpan time)
@@ -83,7 +85,7 @@ namespace AwesomeThreadingFun.Components
         {
             if (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Contains(InputManager.GetMouseBounds()))
             {
-                if (InputManager.GetIsMouseButtonReleased(MouseButton.Left))
+                if (InputManager.GetHasMouseButtonBeenReleased(MouseButton.Left))
                 {
                     //If mouse hovers over, and button is released
                     contracts.Add(new Contract(maxNumberOfTrucks, contractTime));
@@ -100,5 +102,10 @@ namespace AwesomeThreadingFun.Components
 
         public void AddContract(Contract contract)
             => contracts.Add(contract);
+
+        private void ButtonHandler(ButtonType type, GameObject sender)
+        {
+
+        }
     }
 }
