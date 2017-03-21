@@ -20,7 +20,7 @@ namespace AwesomeThreadingFun.Components
         {
             get
             {
-                return maxValue * (int)((pointer.Transform.Position.X - this.Gameobject.Transform.Position.X) /
+                return (int)(maxValue * (pointer.Transform.Position.X - this.Gameobject.Transform.Position.X) /
                     (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width));
             }
         }
