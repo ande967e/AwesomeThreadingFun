@@ -49,7 +49,7 @@ namespace AwesomeThreadingFun
             // TODO: Add your initialization logic here
             base.Initialize();
             Other.Picture.Initialize(Content);
-
+            
             GameObject Factory;
 
             Add(new Director(new ShopBuilder()).BuildObject());
@@ -65,6 +65,11 @@ namespace AwesomeThreadingFun
             Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height))).BuildObject();
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(50, 100000));
             Add(Factory);
+
+            GameObject slider;
+            slider = new Director(new SliderBuilder(new Other.Vector(100, 100))).BuildObject();
+            Add(slider);
+
         }
 
         /// <summary>
