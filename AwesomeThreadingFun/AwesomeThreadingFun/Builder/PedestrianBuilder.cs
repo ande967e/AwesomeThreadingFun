@@ -28,7 +28,8 @@ namespace AwesomeThreadingFun.Builder
             go = new GameObject();
             go.AddComponent(new Transform(go, new VectorF(0, 0)));
             go.AddComponent(new Renderer(go, "Person"));
-            go.AddComponent(new Pedestrian(go, speed, spawn, target, Gameworld.Instance.Random.Next() % 100 < willBuyChance
+            int chance = Gameworld.Instance.GetGameobject(g => g.GetComponent<Shop>() != null).GetComponent<Shop>().Popularity;
+            go.AddComponent(new Pedestrian(go, speed, spawn, target, Gameworld.Instance.Random.Next() % 100 < chance
                 , Gameworld.Instance.Random.Next() % maxBuyOrder, Gameworld.Instance.Random.Next() % delay));
         }
 
