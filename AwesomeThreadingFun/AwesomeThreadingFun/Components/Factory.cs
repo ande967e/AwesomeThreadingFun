@@ -37,6 +37,7 @@ namespace AwesomeThreadingFun.Components
             director = new Director(new Truckbuilder(this.Gameobject, this.truckTravelSpeed, this.truckCargoSize, this.truckOnloadTime));
             this.maxNumberOfTrucks = 10;
             this.contractTime = 10000;
+            Renderer.Layer = .2f;
 
             //Adds slider for number of trucks
             Gameworld.Instance.Add(trucksContract = new Director(new SliderBuilder(
@@ -61,16 +62,15 @@ namespace AwesomeThreadingFun.Components
                 {
                     Contract c = contracts[i];
                     //adds to the contract's time it has been alive.
-                    c.ContractTimer += time.Milliseconds;
 
                     //Spawns trucks.
-                    if((c.ContractTimer - spawnSpeed*c.NumberOfTrucks) >= spawnSpeed && c.MaxNumberOfTrucks > c.NumberOfTrucks)
+                    if(((DateTime.Now - c.CreationTime).TotalMilliseconds - spawnSpeed*c.NumberOfTrucks) >= spawnSpeed && c.MaxNumberOfTrucks > c.NumberOfTrucks)
                     {
                         SpawnTruck(c);
                     }
 
                     //If the contracts time has been exceeded it will be removed.
-                    if (c.ContractTimer >= c.ContractTime)
+                    if ((DateTime.Now - c.CreationTime).TotalMilliseconds >= c.ContractTime)
                     {
                         c.DestroyContract();
                         contracts.Remove(c);
