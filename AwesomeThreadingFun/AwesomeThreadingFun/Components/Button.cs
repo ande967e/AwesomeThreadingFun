@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Button : Component, IUpdateable
+    class Button : Component, IUpdateable, IDrawable
     {
         private ButtonType type;
         private BoxCollider col;
@@ -30,6 +32,12 @@ namespace AwesomeThreadingFun.Components
             }
             else
                 Renderer.Color = Microsoft.Xna.Framework.Color.White;
+        }
+
+        public void Draw(SpriteBatch sb)
+        {
+            Other.Vector pos = new Other.Vector((int)this.Transform.Position.X, (int)(this.Transform.Position.Y - 10));
+            sb.DrawString(Gameworld.Instance.Font, type.ToString(), pos, Color.White);
         }
     }
 }

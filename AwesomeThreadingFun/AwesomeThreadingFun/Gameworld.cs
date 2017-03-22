@@ -83,7 +83,7 @@ namespace AwesomeThreadingFun
             Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, 
                 new Other.Vector(Window.ClientBounds.Width / 3, (Window.ClientBounds.Height / 2) + 100))).BuildObject());
             Add(new Director(new ButtonBuilder(ButtonType.CounterUpgrade,
-                new Other.Vector((Window.ClientBounds.Width / 3) + 35, (Window.ClientBounds.Height / 2) + 100))).BuildObject());
+                new Other.Vector((Window.ClientBounds.Width / 3), (Window.ClientBounds.Height / 2) + 140))).BuildObject());
         }
 
         /// <summary>
