@@ -41,8 +41,6 @@
     <Compile Include="Builder\ButtonBuilder.cs" />
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\FactoryBuilder.cs" />
-    <Compile Include="Builder\PedestrianBuilder.cs" />
-    <Compile Include="Builder\PeopleSpawnBuilder.cs" />
     <Compile Include="Builder\ShopBuilder.cs" />
     <Compile Include="Builder\SliderBuilder.cs" />
     <Compile Include="Builder\Truckbuilder.cs" />
