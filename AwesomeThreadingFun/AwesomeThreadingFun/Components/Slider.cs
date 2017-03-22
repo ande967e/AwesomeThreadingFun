@@ -41,7 +41,7 @@ namespace AwesomeThreadingFun.Components
             //Creates the pointer.
             pointer = new GameObject(1f);
             pointer.AddComponent(new Transform(pointer, VectorF.Zero));
-            pointer.AddComponent(new Renderer(pointer, "Building"));
+            pointer.AddComponent(new Renderer(pointer, "Building", Color.Gray));
             pointer.AddComponent(new BoxCollider(pointer));
             pointerCol = pointer.GetComponent<BoxCollider>();
             Gameworld.Instance.Add(pointer);

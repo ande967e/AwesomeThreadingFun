@@ -26,7 +26,7 @@ namespace AwesomeThreadingFun.Builder
         {
             go = new GameObject(1);
             go.AddComponent(new Transform(go, position));
-            go.AddComponent(new Renderer(go, "Building"));
+            go.AddComponent(new Renderer(go, "Building", Color.Gray));
             go.AddComponent(new BoxCollider(go));
             go.AddComponent(new Slider(go, maxValue));
             go.GetComponent<Slider>().LoadContent();
