@@ -58,7 +58,7 @@ namespace AwesomeThreadingFun
             base.Initialize();
             Other.Picture.Initialize(Content);
             ButtonEventHandler.Initialize();
-            font = Content.Load<SpriteFont>("font");
+            font = Content.Load<SpriteFont>("Fonts/font");
 
             GameObject Factory;
 
