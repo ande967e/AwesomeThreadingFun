@@ -56,6 +56,14 @@ namespace AwesomeThreadingFun
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+
+            //Resizes the screen
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.ApplyChanges();
+            this.Window.Position = new Point(0, 0);
+
+            //----- Game initialization -------
             Other.Picture.Initialize(Content);
             ButtonEventHandler.Initialize();
             font = Content.Load<SpriteFont>("Fonts/font");
@@ -70,13 +78,13 @@ namespace AwesomeThreadingFun
             Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, GraphicsDevice.Viewport.Height))).BuildObject());
             
             //Adds factories
-            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.6f), (int)(GraphicsDevice.Viewport.Height * 0.8f)), 1500, 1)).BuildObject();
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.7f), (int)(GraphicsDevice.Viewport.Height * 0.8f)), 1500, 1)).BuildObject();
             Add(Factory);
 
-            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.6f), (int)(GraphicsDevice.Viewport.Height * 0.5f)), 1000, 2)).BuildObject();
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.7f), (int)(GraphicsDevice.Viewport.Height * 0.5f)), 1000, 2)).BuildObject();
             Add(Factory);
             
-            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.6f), (int)(GraphicsDevice.Viewport.Height * 0.2f)), 500, 3)).BuildObject();
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.7f), (int)(GraphicsDevice.Viewport.Height * 0.2f)), 500, 3)).BuildObject();
             Add(Factory);
 
             //Adds buttons
