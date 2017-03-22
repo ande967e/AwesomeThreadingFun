@@ -39,7 +39,7 @@ namespace AwesomeThreadingFun.ShopItems
             lock(key)
             {
                 goods -= (goodsAmount > goods ? goods : goodsAmount);
-                money += goodsAmount * 10;
+                money += (goodsAmount > goods ? goods : goodsAmount) * 10;
             }
             Thread.Sleep(2000);
             interacter = null;
