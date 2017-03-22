@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Slider : Component, IUpdateable
+    class Slider : Component, IUpdateable, IDrawable
     {
         private BoxCollider pointerCol;
         private GameObject pointer;
@@ -78,5 +79,19 @@ namespace AwesomeThreadingFun.Components
                 pointMove = false;
         }
 
+        public void Draw(SpriteBatch sb)
+        {
+            //Writes the minimum value
+            Vector pos = new Vector((int)this.Gameobject.Transform.Position.X - 10, (int)this.Gameobject.Transform.Position.Y);
+            sb.DrawString(Gameworld.Instance.Font, "0", pos, Color.White);
+
+            //Writes the maximum value
+            pos = new Vector((int)(this.Gameobject.Transform.Position.X + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width) + 10, (int)this.Gameobject.Transform.Position.Y);
+            sb.DrawString(Gameworld.Instance.Font, maxValue.ToString(), pos, Color.White);
+
+            //Writes the current value
+            pos = new Vector((int)(pointer.Transform.Position.X), (int)pointer.Transform.Position.Y - 10);
+            sb.DrawString(Gameworld.Instance.Font, GetCurrentValue.ToString(), pos, Color.White);
+        }
     }
 }

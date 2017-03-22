@@ -22,11 +22,16 @@ namespace AwesomeThreadingFun
     class Gameworld : Game
     {
         private object key = new object();
+        private SpriteFont font;
 
         private static Gameworld _instance;
         public static Gameworld Instance { get { return _instance == null ? _instance = new Gameworld() : _instance; } }
 
         public Random Random;
+        public SpriteFont Font
+        {
+            get { return font; }
+        }
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -53,6 +58,7 @@ namespace AwesomeThreadingFun
             base.Initialize();
             Other.Picture.Initialize(Content);
             ButtonEventHandler.Initialize();
+            font = Content.Load<SpriteFont>("font");
 
             GameObject Factory;
 
