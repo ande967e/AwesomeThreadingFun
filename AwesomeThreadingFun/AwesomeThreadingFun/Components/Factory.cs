@@ -43,7 +43,7 @@ namespace AwesomeThreadingFun.Components
                 new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y - 20), 100)).BuildObject());
             //Adds slider for contract time
             Gameworld.Instance.Add(timeContract = new Director(new SliderBuilder(
-                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y + 20), 100)).BuildObject());
+                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y + 30), 100)).BuildObject());
 
             ButtonEventHandler.SubscribeToEvent(ButtonHandler);
         }
