@@ -35,7 +35,7 @@ namespace AwesomeThreadingFun.Components
         public void LoadContent()
         {
             //Changes the sliders picture
-            this.Gameobject.Renderer.SourceRectangle = new Rectangle(0, 0, this.Gameobject.Renderer.Sprite.Width, 1);
+            this.Gameobject.Renderer.SourceRectangle = new Rectangle(0, 0, (int)(this.Gameobject.Renderer.Sprite.Width * 0.7f), 1);
             this.Gameobject.Scale *= 10;
 
             //Creates the pointer.

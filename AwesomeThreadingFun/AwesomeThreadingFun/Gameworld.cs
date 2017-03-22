@@ -62,24 +62,28 @@ namespace AwesomeThreadingFun
 
             GameObject Factory;
 
-            Add(new Director(new ShopBuilder()).BuildObject());
+            //Adds shop
+            Add(new Director(new ShopBuilder(new Other.Vector(Window.ClientBounds.Width/3, Window.ClientBounds.Height/2))).BuildObject());
 
-            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 2, 0))).BuildObject());
-            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height))).BuildObject());
+            //Adds perdenstrian spawners
+            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, 0))).BuildObject());
+            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, GraphicsDevice.Viewport.Height))).BuildObject());
             
-            Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), 1500, 1)).BuildObject();
-            Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 200000));
+            //Adds factories
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.6f), (int)(GraphicsDevice.Viewport.Height * 0.8f)), 1500, 1)).BuildObject();
             Add(Factory);
 
-            Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, 0), 1000, 2)).BuildObject();
-            Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(10, 5000000));
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.6f), (int)(GraphicsDevice.Viewport.Height * 0.5f)), 1000, 2)).BuildObject();
             Add(Factory);
             
-            Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height - 200), 500, 3)).BuildObject();
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.6f), (int)(GraphicsDevice.Viewport.Height * 0.2f)), 500, 3)).BuildObject();
             Add(Factory);
 
-            Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, new Other.VectorF(
-                GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2))).BuildObject());
+            //Adds buttons
+            Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, 
+                new Other.Vector(Window.ClientBounds.Width / 3, (Window.ClientBounds.Height / 2) + 100))).BuildObject());
+            Add(new Director(new ButtonBuilder(ButtonType.CounterUpgrade,
+                new Other.Vector((Window.ClientBounds.Width / 3) + 35, (Window.ClientBounds.Height / 2) + 100))).BuildObject());
         }
 
         /// <summary>

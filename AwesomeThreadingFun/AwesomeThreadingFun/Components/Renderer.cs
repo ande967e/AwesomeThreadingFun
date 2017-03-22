@@ -27,7 +27,7 @@ namespace AwesomeThreadingFun.Components
         { }
 
         public Renderer(GameObject go, string texture, Color color) 
-            : this(go, Other.Picture.GetImage(texture), Color.White)
+            : this(go, Other.Picture.GetImage(texture), color)
         { }
 
         public Renderer(GameObject go, Texture2D texture, Color color)
