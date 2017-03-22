@@ -26,6 +26,8 @@ namespace AwesomeThreadingFun
         private static Gameworld _instance;
         public static Gameworld Instance { get { return _instance == null ? _instance = new Gameworld() : _instance; } }
 
+        public Random Random;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<GameObject> gos;
@@ -36,6 +38,7 @@ namespace AwesomeThreadingFun
             gos = new List<GameObject>();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Random = new Random((int)DateTime.Now.Ticks);
         }
 
         /// <summary>
@@ -54,6 +57,9 @@ namespace AwesomeThreadingFun
             GameObject Factory;
 
             Add(new Director(new ShopBuilder()).BuildObject());
+
+            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 2, 0))).BuildObject());
+            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height))).BuildObject());
             
             Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), 1500, 1)).BuildObject();
             Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 200000));
