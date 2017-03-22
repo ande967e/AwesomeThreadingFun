@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using AwesomeThreadingFun.Builder;
 using AwesomeThreadingFun.ShopItems;
+using Microsoft.Xna.Framework;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Factory : Component, IUpdateable, IInteractable
+    class Factory : Component, IUpdateable, IInteractable, IDrawable
     {
         private int truckCargoSize; //the amount of cargo the truck carries.
         private int truckTravelSpeed; //the speed of which the truck travels.
@@ -17,6 +18,7 @@ namespace AwesomeThreadingFun.Components
         private Director director;
         private int spawnSpeed; //the time between trucks are send on it's way.                     --> Miliseconds.
         private int spawnTimer; //indicates the upcounter until next truck spawn.
+        private int contractPrice;
         private List<Contract> contracts;
 
         //Values to construct a contract
@@ -26,6 +28,8 @@ namespace AwesomeThreadingFun.Components
         //Sliders
         private GameObject trucksContract;
         private GameObject timeContract;
+
+        public int ContractPrice { get { return contractPrice; } }
 
         public Factory(GameObject go, int spawnSpeed, int truckCargoSize, int truckTravelSpeed, int truckOnloadTime) : base(go)
         {
@@ -51,6 +55,9 @@ namespace AwesomeThreadingFun.Components
 
         public void Update(TimeSpan time)
         {
+            //Updates the contracts price
+            ContractPriceCalculator();
+
             //checks if new contract should be bought, and buys if so
             CheckAndBuyContract();
 
@@ -77,6 +84,12 @@ namespace AwesomeThreadingFun.Components
                     }
                 }
             }  
+        }
+
+        private void ContractPriceCalculator()
+        {
+            contractPrice = (trucksContract.GetComponent<Slider>().GetCurrentValue * timeContract.GetComponent<Slider>().GetCurrentValue)
+                * truckCargoSize;
         }
 
         public Loadingbay Interact()
@@ -116,6 +129,12 @@ namespace AwesomeThreadingFun.Components
         private void ButtonHandler(ButtonType type, GameObject sender)
         {
 
+        }
+
+        public void Draw(SpriteBatch sb)
+        {
+            Other.Vector pos = new Other.Vector((int)(trucksContract.Transform.Position.X + trucksContract.GetComponent<BoxCollider>().CollisionRectangle.Width + 10), (int)this.Transform.Position.Y + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Height/2);
+            sb.DrawString(Gameworld.Instance.Font, "Price: " + contractPrice.ToString(), pos, Color.White);
         }
     }
 }
