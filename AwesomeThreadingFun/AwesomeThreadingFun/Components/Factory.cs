@@ -110,9 +110,13 @@ namespace AwesomeThreadingFun.Components
             {
                 if (InputManager.GetHasMouseButtonBeenReleased(MouseButton.Left))
                 {
-                    //If mouse hovers over, and button is released
-                    contracts.Add(new Contract(trucksContract.GetComponent<Slider>().GetCurrentValue, timeContract.GetComponent<Slider>().GetCurrentValue * 60000));
-                    Renderer.Color = Microsoft.Xna.Framework.Color.White;
+                    if (Gameworld.Instance.GetGameobject(g => g.GetComponent<Shop>() != null).GetComponent<Shop>().Money >= contractPrice)
+                    {
+                        //If mouse hovers over, and button is released
+                        contracts.Add(new Contract(trucksContract.GetComponent<Slider>().GetCurrentValue, timeContract.GetComponent<Slider>().GetCurrentValue * 60000));
+                        Gameworld.Instance.GetGameobject(g => g.GetComponent<Shop>() != null).GetComponent<Shop>().Money -= contractPrice;
+                        Renderer.Color = Microsoft.Xna.Framework.Color.White;
+                    }
                 }
                 else if (InputManager.GetIsMouseButtonPressed(MouseButton.Left))
                     Renderer.Color = Microsoft.Xna.Framework.Color.Blue;

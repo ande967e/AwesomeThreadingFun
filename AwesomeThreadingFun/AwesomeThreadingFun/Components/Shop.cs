@@ -13,7 +13,7 @@ namespace AwesomeThreadingFun.Components
     class Shop : Component, IUpdateable, IInteractable, IDrawable
     {
         private int stock;
-        private int money;
+        public int Money { get; set; }
         private List<Loadingbay> loadingbays;
         private List<Counter> counters;
         private object key = new object();
@@ -21,6 +21,7 @@ namespace AwesomeThreadingFun.Components
 
         public Shop (GameObject go) : base (go)
         {
+            Money = 10000;
             loadingbays = new List<Loadingbay>();
             counters = new List<Counter>();
             ButtonEventHandler.SubscribeToEvent(ButtonHandler);
@@ -45,7 +46,7 @@ namespace AwesomeThreadingFun.Components
             for(int i = 0; i < counters.Count; i++)
             {
                 counters[i].GiveGoods(goods);
-                money += counters[i].TakeMoney();
+                Money += counters[i].TakeMoney();
                 stock -= goods;
             }
         }
@@ -84,7 +85,7 @@ namespace AwesomeThreadingFun.Components
         {
             //Writes the amount of money the shop has
             Other.Vector pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 15);
-            sb.DrawString(Gameworld.Instance.Font, "Money: " + money, pos, Color.White);
+            sb.DrawString(Gameworld.Instance.Font, "Money: " + Money, pos, Color.White);
 
             //Writes the amount of stock the shop has
             pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 30);
