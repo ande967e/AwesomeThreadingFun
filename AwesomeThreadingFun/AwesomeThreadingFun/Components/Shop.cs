@@ -13,6 +13,7 @@ namespace AwesomeThreadingFun.Components
     class Shop : Component, IUpdateable, IInteractable, IDrawable
     {
         private int stock;
+        private int totalStock;
         private int money;
         private List<Loadingbay> loadingbays;
         private List<Counter> counters;
@@ -47,6 +48,14 @@ namespace AwesomeThreadingFun.Components
                 counters[i].GiveGoods(goods);
                 money += counters[i].TakeMoney();
                 stock -= goods;
+            }
+
+            //Updates totalStock 
+            for (int i = 0; i < counters.Count; i++)
+            {
+                totalStock = 0;
+                totalStock += counters[i].Goods;
+                totalStock += stock;
             }
         }
 
@@ -88,7 +97,7 @@ namespace AwesomeThreadingFun.Components
 
             //Writes the amount of stock the shop has
             pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 30);
-            sb.DrawString(Gameworld.Instance.Font, "Stock: " + stock, pos, Color.White);
+            sb.DrawString(Gameworld.Instance.Font, "Stock: " + totalStock, pos, Color.White);
         }
     }
 }

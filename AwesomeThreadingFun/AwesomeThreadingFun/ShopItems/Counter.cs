@@ -14,6 +14,8 @@ namespace AwesomeThreadingFun.ShopItems
         private object key = new object();
         public GameObject interacter;
 
+        public int Goods { get { return goods; } }
+
         public Counter()
         {
             goods = 0;
