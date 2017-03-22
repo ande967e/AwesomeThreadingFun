@@ -65,7 +65,7 @@ namespace AwesomeThreadingFun.Components
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(Sprite, new Rectangle((Point)Transform.Position, new Point((int)(SourceRectangle.Width * Gameobject.Scale), 
-                (int)(SourceRectangle.Height * Gameobject.Scale))), Color);
+                (int)(SourceRectangle.Height * Gameobject.Scale))), SourceRectangle, Color, 0, Vector2.Zero, SpriteEffects.None, Layer);
         }
         #endregion
     }
