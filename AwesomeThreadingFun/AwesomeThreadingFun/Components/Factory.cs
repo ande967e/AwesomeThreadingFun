@@ -138,7 +138,7 @@ namespace AwesomeThreadingFun.Components
         public void Draw(SpriteBatch sb)
         {
             Other.Vector pos = new Other.Vector((int)(trucksContract.Transform.Position.X + trucksContract.GetComponent<BoxCollider>().CollisionRectangle.Width + 10), (int)this.Transform.Position.Y + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Height/2);
-            sb.DrawString(Gameworld.Instance.Font, "Price: " + contractPrice.ToString(), pos, Color.White);
+            sb.DrawString(Gameworld.Instance.Font, "Price: $" + contractPrice.ToString(), pos, Color.White);
         }
     }
 }

@@ -20,7 +20,6 @@ namespace AwesomeThreadingFun.Builder
             this.position = position;
             this.maxPeople = maxPeople;
             this.peopleSpawnDelay = peopleSpawnDelay;
-            //LeCommen
         }
 
         public void BuildGameobject()

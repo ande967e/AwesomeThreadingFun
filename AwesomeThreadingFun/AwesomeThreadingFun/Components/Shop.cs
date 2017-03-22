@@ -21,6 +21,9 @@ namespace AwesomeThreadingFun.Components
         private object cKey = new object();
 
         public int Popularity { get; set; }
+        public int PopularityCost { get; private set; }
+        public int CounterCost { get { return 10000 * counters.Count; } }
+        public int LoadingbayCost { get { return 10000 * loadingbays.Count; } }
 
         public Shop (GameObject go) : base (go)
         {
@@ -31,6 +34,7 @@ namespace AwesomeThreadingFun.Components
             Renderer.Layer = .1f;
 
             Popularity = 40;
+            PopularityCost = 20000;
 
             for (int i = 0; i < 5; i++)
             {
@@ -47,12 +51,14 @@ namespace AwesomeThreadingFun.Components
             }
 
             int goods = stock / counters.Count;
+            int goodsC1 = counters[0].Goods;
 
             for(int i = 0; i < counters.Count; i++)
             {
-                counters[i].GiveGoods(goods);
+                int goodsToGive = goodsC1 + goods - counters[i].Goods;
+                counters[i].GiveGoods(goodsToGive);
                 Money += counters[i].TakeMoney();
-                stock -= goods;
+                stock -= goodsToGive;
             }
 
             //Updates totalStock 
@@ -84,12 +90,26 @@ namespace AwesomeThreadingFun.Components
             switch(type)
             {
                 case ButtonType.LoadingbayUpgrade:
-                    loadingbays.Add(new Loadingbay());
+                    if (Money > LoadingbayCost)
+                    {
+                        Money -= LoadingbayCost;
+                        loadingbays.Add(new Loadingbay());
+                    }
                     break;
                 case ButtonType.CounterUpgrade:
-                    counters.Add(new Counter());
+                    if (Money > CounterCost)
+                    {
+                        Money -= CounterCost;
+                        counters.Add(new Counter());
+                    }
                     break;
-                case ButtonType.StorageUpgrade:
+                case ButtonType.PopularityUpgrade:
+                    if (Money > PopularityCost)
+                    {
+                        Money -= PopularityCost;
+                        Popularity += 10;
+                        PopularityCost *= 2;
+                    }
                     break;
             }
         }
@@ -98,11 +118,14 @@ namespace AwesomeThreadingFun.Components
         {
             //Writes the amount of money the shop has
             Other.Vector pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 15);
-            sb.DrawString(Gameworld.Instance.Font, "Money: " + Money, pos, Color.White);
+            sb.DrawString(Gameworld.Instance.Font, "Money: $" + Money, pos, Color.White);
 
             //Writes the amount of stock the shop has
             pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 30);
-            sb.DrawString(Gameworld.Instance.Font, "Stock: " + totalStock, pos, Color.White);
+            sb.DrawString(Gameworld.Instance.Font, "Stock: " + stock, pos, Color.White);
+
+            pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 45);
+            sb.DrawString(Gameworld.Instance.Font, "Popularity: " + Popularity, pos, Color.White);
         }
     }
 }
