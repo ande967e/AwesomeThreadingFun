@@ -10,6 +10,7 @@ namespace AwesomeThreadingFun.ShopItems
     class Counter
     {
         private int goods;
+        private int money;
         private object key = new object();
         public GameObject interacter;
 
@@ -23,9 +24,23 @@ namespace AwesomeThreadingFun.ShopItems
             lock(key) { goods += goodsAmount; }
         }
 
+        public int TakeMoney()
+        {
+            lock (key)
+            {
+                int tempMoney = money;
+                money = 0;
+                return tempMoney;
+            }
+        }
+
         public void BuyGoods(int goodsAmount)
         {
-            lock(key) { goods -= (goodsAmount > goods ? goods : goodsAmount); }
+            lock(key)
+            {
+                goods -= (goodsAmount > goods ? goods : goodsAmount);
+                money += (goodsAmount > goods ? goods : goodsAmount) * 10;
+            }
             Thread.Sleep(2000);
             interacter = null;
         }
