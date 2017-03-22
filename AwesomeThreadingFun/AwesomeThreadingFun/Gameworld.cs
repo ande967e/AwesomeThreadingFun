@@ -167,7 +167,7 @@ namespace AwesomeThreadingFun
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
             lock (key)
             {
                 for (int i = 0; i < gos.Count; i++)
