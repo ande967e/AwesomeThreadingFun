@@ -66,7 +66,7 @@ namespace AwesomeThreadingFun
             Add(new Director(new ShopBuilder(new Other.Vector(Window.ClientBounds.Width/3, Window.ClientBounds.Height/2))).BuildObject());
 
             //Adds perdenstrian spawners
-            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, 0))).BuildObject());
+            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, -50))).BuildObject());
             Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, GraphicsDevice.Viewport.Height))).BuildObject());
             
             //Adds factories
