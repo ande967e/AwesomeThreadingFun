@@ -22,7 +22,7 @@ namespace AwesomeThreadingFun.Components
             get
             {
                 return (int)(maxValue * (pointer.Transform.Position.X - this.Gameobject.Transform.Position.X) /
-                    (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width));
+                    (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width - pointer.GetComponent<BoxCollider>().CollisionRectangle.Width));
             }
         }
 
@@ -31,7 +31,6 @@ namespace AwesomeThreadingFun.Components
             pointMove = false;
             this.maxValue = maxValue;
         }
-
 
         public void LoadContent()
         {
