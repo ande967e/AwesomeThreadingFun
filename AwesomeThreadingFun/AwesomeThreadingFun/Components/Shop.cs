@@ -24,7 +24,6 @@ namespace AwesomeThreadingFun.Components
             loadingbays = new List<Loadingbay>();
             counters = new List<Counter>();
             ButtonEventHandler.SubscribeToEvent(ButtonHandler);
-            Renderer.Layer = 1f;
 
             for (int i = 0; i < 5; i++)
             {
