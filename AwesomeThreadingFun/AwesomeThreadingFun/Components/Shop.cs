@@ -20,6 +20,8 @@ namespace AwesomeThreadingFun.Components
         private object key = new object();
         private object cKey = new object();
 
+        public int Popularity { get; set; }
+
         public Shop (GameObject go) : base (go)
         {
             Money = 10000;
@@ -27,6 +29,8 @@ namespace AwesomeThreadingFun.Components
             counters = new List<Counter>();
             ButtonEventHandler.SubscribeToEvent(ButtonHandler);
             Renderer.Layer = .1f;
+
+            Popularity = 40;
 
             for (int i = 0; i < 5; i++)
             {

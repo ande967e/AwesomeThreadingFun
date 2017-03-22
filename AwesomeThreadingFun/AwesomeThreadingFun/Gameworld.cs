@@ -173,7 +173,7 @@ namespace AwesomeThreadingFun
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Multiply(Color.Gray, 1.3f));
 
             spriteBatch.Begin(SpriteSortMode.BackToFront);
             lock (key)
