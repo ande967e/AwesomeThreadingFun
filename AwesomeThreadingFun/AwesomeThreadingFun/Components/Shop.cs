@@ -10,10 +10,10 @@ using AwesomeThreadingFun.ShopItems;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Shop : Component, IUpdateable, IInteractable
+    class Shop : Component, IUpdateable, IInteractable, IDrawable
     {
-        private int Stock;
-        private int Money;
+        private int stock;
+        private int money;
         private List<Loadingbay> loadingbays;
         private List<Counter> counters;
         private object key = new object();
@@ -37,15 +37,16 @@ namespace AwesomeThreadingFun.Components
         {
             for(int i = 0; i < loadingbays.Count; i++)
             {
-                Stock += loadingbays[i].GetGoods();
+                stock += loadingbays[i].GetGoods();
             }
 
-            int goods = Stock / counters.Count;
+            int goods = stock / counters.Count;
 
             for(int i = 0; i < counters.Count; i++)
             {
                 counters[i].GiveGoods(goods);
-                Stock -= goods;
+                money += counters[i].TakeMoney();
+                stock -= goods;
             }
         }
 
@@ -77,6 +78,17 @@ namespace AwesomeThreadingFun.Components
                 case ButtonType.StorageUpgrade:
                     break;
             }
+        }
+
+        public void Draw(SpriteBatch sb)
+        {
+            //Writes the amount of money the shop has
+            Other.Vector pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 15);
+            sb.DrawString(Gameworld.Instance.Font, "Money: " + money, pos, Color.White);
+
+            //Writes the amount of stock the shop has
+            pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 30);
+            sb.DrawString(Gameworld.Instance.Font, "Stock: " + stock, pos, Color.White);
         }
     }
 }
