@@ -14,7 +14,6 @@ namespace AwesomeThreadingFun.Components
     {
         private int stock;
         private int totalStock;
-        private int money;
         public int Money { get; set; }
         private List<Loadingbay> loadingbays;
         private List<Counter> counters;
