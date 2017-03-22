@@ -15,11 +15,19 @@ namespace AwesomeThreadingFun.Builder
         private GameObject go;
         private Vector position;
         private int maxValue;
+        private bool type;
 
         public SliderBuilder(Vector position, int maxValue)
         {
             this.position = position;
             this.maxValue = maxValue;
+        }
+
+        public SliderBuilder(Vector position, int maxValue, bool type)
+        {
+            this.position = position;
+            this.maxValue = maxValue;
+            this.type = type;
         }
 
         public void BuildGameobject()
@@ -28,7 +36,7 @@ namespace AwesomeThreadingFun.Builder
             go.AddComponent(new Transform(go, position));
             go.AddComponent(new Renderer(go, "Building", Color.Gray));
             go.AddComponent(new BoxCollider(go));
-            go.AddComponent(new Slider(go, maxValue));
+            go.AddComponent(new Slider(go, maxValue, type));
             go.GetComponent<Slider>().LoadContent();
         }
 

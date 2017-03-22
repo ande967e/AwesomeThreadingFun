@@ -16,6 +16,7 @@ namespace AwesomeThreadingFun.Components
         private GameObject pointer;
         private bool pointMove;
         private int maxValue;
+        private string text;
 
         public int GetCurrentValue
         {
@@ -30,6 +31,17 @@ namespace AwesomeThreadingFun.Components
         {
             pointMove = false;
             this.maxValue = maxValue;
+        }
+
+        public Slider(GameObject go, int maxValue, bool type) : base(go)
+        {
+            pointMove = false;
+            this.maxValue = maxValue;
+
+            if (type)
+                text = "trucks";
+            else
+                text = "minutes";
         }
 
         public void LoadContent()
@@ -89,8 +101,8 @@ namespace AwesomeThreadingFun.Components
             sb.DrawString(Gameworld.Instance.Font, maxValue.ToString(), pos, Color.White);
 
             //Writes the current value
-            pos = new Vector((int)(pointer.Transform.Position.X), (int)pointer.Transform.Position.Y - 10);
-            sb.DrawString(Gameworld.Instance.Font, GetCurrentValue.ToString(), pos, Color.White);
+            pos = new Vector((int)(pointer.Transform.Position.X), (int)pointer.Transform.Position.Y - 20);
+            sb.DrawString(Gameworld.Instance.Font, GetCurrentValue.ToString() + " " + text, pos, Color.White);
         }
     }
 }

@@ -40,10 +40,10 @@ namespace AwesomeThreadingFun.Components
 
             //Adds slider for number of trucks
             Gameworld.Instance.Add(trucksContract = new Director(new SliderBuilder(
-                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y - 20), 100)).BuildObject());
+                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y - 25), 100, true)).BuildObject());
             //Adds slider for contract time
             Gameworld.Instance.Add(timeContract = new Director(new SliderBuilder(
-                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y + 30), 100)).BuildObject());
+                new Other.Vector((int)this.Gameobject.Transform.Position.X + 40, (int)this.Gameobject.Transform.Position.Y + 35), 100, false)).BuildObject());
 
             ButtonEventHandler.SubscribeToEvent(ButtonHandler);
         }
