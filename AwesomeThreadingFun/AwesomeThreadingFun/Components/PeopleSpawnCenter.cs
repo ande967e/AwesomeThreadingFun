@@ -29,7 +29,7 @@ namespace AwesomeThreadingFun.Components
             this._curPeople = 0;
             this.lastSpawn = DateTime.Now;
             this.PedDirector = new Builder.Director(new Builder.PedestrianBuilder(Gameworld.Instance.GetGameobject(g => 
-                g.GetComponent<PeopleSpawnCenter>() != null && g != Gameobject), Gameobject, 1, 40, 10000, 100));
+                g.GetComponent<PeopleSpawnCenter>() != null && g != Gameobject), Gameobject, 1, 40, 10000, 3000));
         }
 
         public void Update(TimeSpan ts)

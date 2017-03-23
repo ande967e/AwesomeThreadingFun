@@ -62,9 +62,9 @@ namespace AwesomeThreadingFun.Components
             }
 
             //Updates totalStock 
+            totalStock = 0;
             for (int i = 0; i < counters.Count; i++)
             {
-                totalStock = 0;
                 totalStock += counters[i].Goods;
                 totalStock += stock;
             }
@@ -122,8 +122,9 @@ namespace AwesomeThreadingFun.Components
 
             //Writes the amount of stock the shop has
             pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 30);
-            sb.DrawString(Gameworld.Instance.Font, "Stock: " + stock, pos, Color.White);
+            sb.DrawString(Gameworld.Instance.Font, "Stock: " + totalStock, pos, Color.White);
 
+            //Writes the popularity of the shop
             pos = new Other.Vector((int)this.Transform.Position.X, (int)this.Transform.Position.Y - 45);
             sb.DrawString(Gameworld.Instance.Font, "Popularity: " + Popularity, pos, Color.White);
         }
