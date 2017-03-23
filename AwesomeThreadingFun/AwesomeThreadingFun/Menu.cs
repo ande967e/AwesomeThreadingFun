@@ -26,8 +26,7 @@ namespace AwesomeThreadingFun
         {
             foreach(UI element in main)
             {
-                element.LoadContent(content);
-                element.CenterElement(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+                element.CenterElement(Gameworld.Instance.GraphicsDevice.Viewport.Width, Gameworld.Instance.GraphicsDevice.Viewport.Height);
                 element.clickEvent += OnClick;
             }
             main.Find(x => x.AssetName == "Play").MoveElement(0, -50);
