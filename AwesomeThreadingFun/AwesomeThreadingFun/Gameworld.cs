@@ -36,7 +36,7 @@ namespace AwesomeThreadingFun
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<GameObject> gos;
-        Menu main = new Menu();
+        Menu main;
 
         private Gameworld()
         {
@@ -69,6 +69,7 @@ namespace AwesomeThreadingFun
             Other.Picture.Initialize(Content);
             ButtonEventHandler.Initialize();
             font = Content.Load<SpriteFont>("Fonts/font");
+            main = new Menu();
             main.LoadContent(Content);
 
             GameObject Factory;
