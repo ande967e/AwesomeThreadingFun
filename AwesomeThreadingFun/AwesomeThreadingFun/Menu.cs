@@ -30,8 +30,8 @@ namespace AwesomeThreadingFun
                 element.CenterElement(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
                 element.clickEvent += OnClick;
             }
-            main.Find(x => x.AssetName == "Play").MoveElement(0, -50);
-            main.Find(x => x.AssetName == "Exit").MoveElement(0, 50);
+            main.Find(x => x.AssetName == "Play").MoveElement(0, 50);
+            main.Find(x => x.AssetName == "Exit").MoveElement(0, 150);
         }
 
         public void Update()
