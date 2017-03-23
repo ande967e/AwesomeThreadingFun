@@ -22,13 +22,26 @@ namespace AwesomeThreadingFun
     class Gameworld : Game
     {
         private object key = new object();
+        private SpriteFont font;
 
         private static Gameworld _instance;
         public static Gameworld Instance { get { return _instance == null ? _instance = new Gameworld() : _instance; } }
 
+        private object ranKey = new object();
+        private Random _random;
+        public int Random
+        {
+            get { lock(ranKey) { return _random.Next(); } }
+        }
+        public SpriteFont Font
+        {
+            get { return font; }
+        }
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<GameObject> gos;
+        Menu main;
 
         private Gameworld()
         {
@@ -36,6 +49,7 @@ namespace AwesomeThreadingFun
             gos = new List<GameObject>();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            _random = new Random((int)DateTime.Now.Ticks);
         }
 
         /// <summary>
@@ -46,28 +60,49 @@ namespace AwesomeThreadingFun
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
+
             base.Initialize();
+
+            //Resizes the screen
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.ApplyChanges();
+            this.Window.Position = new Point(0, 0);
+
+            //----- Game initialization -------
             Other.Picture.Initialize(Content);
             ButtonEventHandler.Initialize();
+            font = Content.Load<SpriteFont>("Fonts/font");
+            main = new Menu();
+            main.LoadContent(Content);
 
             GameObject Factory;
 
-            Add(new Director(new ShopBuilder()).BuildObject());
+            //Adds shop
+            Add(new Director(new ShopBuilder(new Other.Vector(Window.ClientBounds.Width/3, Window.ClientBounds.Height/2))).BuildObject());
+
+            //Adds perdenstrian spawners
+            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, -50))).BuildObject());
+            Add(new Director(new PeopleSpawnBuilder(20, 1000, new Other.VectorF(GraphicsDevice.Viewport.Width / 8, GraphicsDevice.Viewport.Height))).BuildObject());
             
-            Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), 1500, 1)).BuildObject();
-            Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(20, 200000));
+            //Adds factories
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.7f), (int)(GraphicsDevice.Viewport.Height * 0.8f)), 1500, 1)).BuildObject();
             Add(Factory);
 
-            Factory = new Director(new FactoryBuilder(new Other.Vector(GraphicsDevice.Viewport.Width, 0), 1000, 2)).BuildObject();
-            Factory.GetComponent<Components.Factory>().AddContract(new ShopItems.Contract(10, 5000000));
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.7f), (int)(GraphicsDevice.Viewport.Height * 0.5f)), 1000, 2)).BuildObject();
             Add(Factory);
             
-            Factory = new Director(new FactoryBuilder(new Other.Vector(0, GraphicsDevice.Viewport.Height - 200), 500, 3)).BuildObject();
+            Factory = new Director(new FactoryBuilder(new Other.Vector((int)(GraphicsDevice.Viewport.Width * 0.7f), (int)(GraphicsDevice.Viewport.Height * 0.2f)), 500, 3)).BuildObject();
             Add(Factory);
 
-            Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, new Other.VectorF(
-                GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2))).BuildObject());
+            //Adds buttons
+            Add(new Director(new ButtonBuilder(ButtonType.LoadingbayUpgrade, 
+                new Other.Vector(Window.ClientBounds.Width / 3, (Window.ClientBounds.Height / 2) + 100))).BuildObject());
+            Add(new Director(new ButtonBuilder(ButtonType.CounterUpgrade,
+                new Other.Vector((Window.ClientBounds.Width / 3), (Window.ClientBounds.Height / 2) + 140))).BuildObject());
+            Add(new Director(new ButtonBuilder(ButtonType.PopularityUpgrade,
+                new Other.Vector(Window.ClientBounds.Width / 3, (Window.ClientBounds.Height / 2) + 180))).BuildObject());
         }
 
         /// <summary>
@@ -98,7 +133,8 @@ namespace AwesomeThreadingFun
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
+            
+            
         }
 
         /// <summary>
@@ -118,9 +154,10 @@ namespace AwesomeThreadingFun
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+                main.MenuVisible = true;
 
             InputManager.Update(gameTime.TotalGameTime);
+            main.Update();
 
             // TODO: Add your update logic here
 
@@ -149,9 +186,10 @@ namespace AwesomeThreadingFun
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(new Vector3(.45f, .45f, .45f)));
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
+            main.Draw(spriteBatch);
             lock (key)
             {
                 for (int i = 0; i < gos.Count; i++)

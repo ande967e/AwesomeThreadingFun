@@ -26,6 +26,7 @@ namespace AwesomeThreadingFun.Components
             this.MaxLoad = maxLoad;
             this.speed = speed;
             this.unloadTime = unloadTime;
+            Gameobject.Scale = (float)maxLoad / 1500;
         }
 
         public void Update(TimeSpan ts)

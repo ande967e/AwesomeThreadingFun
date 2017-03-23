@@ -41,6 +41,8 @@
     <Compile Include="Builder\ButtonBuilder.cs" />
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\FactoryBuilder.cs" />
+    <Compile Include="Builder\PedestrianBuilder.cs" />
+    <Compile Include="Builder\PeopleSpawnBuilder.cs" />
     <Compile Include="Builder\ShopBuilder.cs" />
     <Compile Include="Builder\SliderBuilder.cs" />
     <Compile Include="Builder\Truckbuilder.cs" />
@@ -49,6 +51,8 @@
     <Compile Include="Components\Button.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Factory.cs" />
+    <Compile Include="Components\Pedestrian.cs" />
+    <Compile Include="Components\PeopleSpawnCenter.cs" />
     <Compile Include="Components\Renderer.cs" />
     <Compile Include="Components\Shop.cs" />
     <Compile Include="Components\Transform.cs" />
@@ -60,6 +64,7 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Interfaces.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Other\Animation.cs" />
     <Compile Include="Other\Picture.cs" />
     <Compile Include="Other\Vector.cs" />

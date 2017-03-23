@@ -6,22 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace AwesomeThreadingFun.Components
 {
-    class Slider : Component, IUpdateable
+    class Slider : Component, IUpdateable, IDrawable
     {
         private BoxCollider pointerCol;
         private GameObject pointer;
         private bool pointMove;
         private int maxValue;
+        private string text;
 
         public int GetCurrentValue
         {
             get
             {
                 return (int)(maxValue * (pointer.Transform.Position.X - this.Gameobject.Transform.Position.X) /
-                    (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width));
+                    (this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width - pointer.GetComponent<BoxCollider>().CollisionRectangle.Width));
             }
         }
 
@@ -31,17 +33,27 @@ namespace AwesomeThreadingFun.Components
             this.maxValue = maxValue;
         }
 
+        public Slider(GameObject go, int maxValue, bool type) : base(go)
+        {
+            pointMove = false;
+            this.maxValue = maxValue;
+
+            if (type)
+                text = "trucks";
+            else
+                text = "minutes";
+        }
 
         public void LoadContent()
         {
             //Changes the sliders picture
-            this.Gameobject.Renderer.SourceRectangle = new Rectangle(0, 0, this.Gameobject.Renderer.Sprite.Width, 1);
+            this.Gameobject.Renderer.SourceRectangle = new Rectangle(0, 0, (int)(this.Gameobject.Renderer.Sprite.Width * 0.5f), 1);
             this.Gameobject.Scale *= 10;
 
             //Creates the pointer.
             pointer = new GameObject(1f);
             pointer.AddComponent(new Transform(pointer, VectorF.Zero));
-            pointer.AddComponent(new Renderer(pointer, "Building"));
+            pointer.AddComponent(new Renderer(pointer, "Building", Color.Gray));
             pointer.AddComponent(new BoxCollider(pointer));
             pointerCol = pointer.GetComponent<BoxCollider>();
             Gameworld.Instance.Add(pointer);
@@ -78,5 +90,19 @@ namespace AwesomeThreadingFun.Components
                 pointMove = false;
         }
 
+        public void Draw(SpriteBatch sb)
+        {
+            //Writes the minimum value
+            Vector pos = new Vector((int)this.Gameobject.Transform.Position.X - 10, (int)this.Gameobject.Transform.Position.Y);
+            sb.DrawString(Gameworld.Instance.Font, "0", pos, Color.White);
+
+            //Writes the maximum value
+            pos = new Vector((int)(this.Gameobject.Transform.Position.X + this.Gameobject.GetComponent<BoxCollider>().CollisionRectangle.Width) + 10, (int)this.Gameobject.Transform.Position.Y);
+            sb.DrawString(Gameworld.Instance.Font, maxValue.ToString(), pos, Color.White);
+
+            //Writes the current value
+            pos = new Vector((int)(pointer.Transform.Position.X), (int)pointer.Transform.Position.Y - 20);
+            sb.DrawString(Gameworld.Instance.Font, GetCurrentValue.ToString() + " " + text, pos, Color.White);
+        }
     }
 }

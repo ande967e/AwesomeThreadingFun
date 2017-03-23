@@ -13,6 +13,7 @@ namespace AwesomeThreadingFun.Components
         #region Properties
         public Texture2D Sprite { get; set; }
         public Rectangle SourceRectangle { get; set; }
+        public float Layer { get; set; }
 
         public Color Color { get; set; }
         #endregion
@@ -27,7 +28,7 @@ namespace AwesomeThreadingFun.Components
         { }
 
         public Renderer(GameObject go, string texture, Color color) 
-            : this(go, Other.Picture.GetImage(texture), Color.White)
+            : this(go, Other.Picture.GetImage(texture), color)
         { }
 
         public Renderer(GameObject go, Texture2D texture, Color color)
@@ -36,6 +37,7 @@ namespace AwesomeThreadingFun.Components
             this.Sprite = texture;
             this.Color = color;
             this.SourceRectangle = new Rectangle(0, 0, Sprite.Width, Sprite.Height);
+            this.Layer = .5f;
         }
 
         public Renderer(GameObject go, string texture, Rectangle sourceRectangle) 
@@ -55,6 +57,7 @@ namespace AwesomeThreadingFun.Components
             this.Sprite = texture;
             this.SourceRectangle = sourceRectangle;
             this.Color = color;
+            this.Layer = .5f;
         }
         #endregion
 
@@ -62,7 +65,7 @@ namespace AwesomeThreadingFun.Components
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(Sprite, new Rectangle((Point)Transform.Position, new Point((int)(SourceRectangle.Width * Gameobject.Scale), 
-                (int)(SourceRectangle.Height * Gameobject.Scale))), Color);
+                (int)(SourceRectangle.Height * Gameobject.Scale))), SourceRectangle, Color, 0, Vector2.Zero, SpriteEffects.None, Layer);
         }
         #endregion
     }
