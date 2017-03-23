@@ -76,7 +76,7 @@ namespace AwesomeThreadingFun.Components
             else if (WillBuy && (DateTime.Now - spawnTime).TotalMilliseconds > delayTillBuy)
             {
                 GameObject[] temp = Gameworld.Instance.GetGameobjects(g => g != null && g.GetComponent<Shop>() != null);
-                curTarget = temp[Gameworld.Instance.Random.Next() % temp.Length];
+                curTarget = temp[Gameworld.Instance.Random % temp.Length];
             }
         }
     }

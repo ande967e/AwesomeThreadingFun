@@ -27,7 +27,12 @@ namespace AwesomeThreadingFun
         private static Gameworld _instance;
         public static Gameworld Instance { get { return _instance == null ? _instance = new Gameworld() : _instance; } }
 
-        public Random Random;
+        private object ranKey = new object();
+        private Random _random;
+        public int Random
+        {
+            get { lock(ranKey) { return _random.Next(); } }
+        }
         public SpriteFont Font
         {
             get { return font; }
@@ -44,7 +49,7 @@ namespace AwesomeThreadingFun
             gos = new List<GameObject>();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Random = new Random((int)DateTime.Now.Ticks);
+            _random = new Random((int)DateTime.Now.Ticks);
         }
 
         /// <summary>
