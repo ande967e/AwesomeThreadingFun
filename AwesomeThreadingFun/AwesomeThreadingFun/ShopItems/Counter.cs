@@ -40,8 +40,9 @@ namespace AwesomeThreadingFun.ShopItems
         {
             lock(key)
             {
-                goods -= (goodsAmount > goods ? goods : goodsAmount);
-                money += (goodsAmount > goods ? goods : goodsAmount) * 10;
+                int gtb = goodsAmount > goods ? goods : goodsAmount;
+                goods -= gtb;
+                money += gtb;
             }
             Thread.Sleep(2000);
             interacter = null;

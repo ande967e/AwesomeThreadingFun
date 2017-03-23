@@ -128,7 +128,7 @@ namespace AwesomeThreadingFun
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            menu = new UI("MenuFinished");
+            menu = new UI("Menus & UI\\MenuFinished");
             menu.LoadContent(Content);
         }
 
