@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using AwesomeThreadingFun.Other;
 
 namespace AwesomeThreadingFun
 {
@@ -16,9 +17,9 @@ namespace AwesomeThreadingFun
 
         public Menu()
         {
-            /*main.Add(new UI("menu"));
-            main.Add(new UI("play"));
-            main.Add(new UI("exit"));*/
+            main.Add(new UI("menu"));
+            main.Add(new UI("Play"));
+            main.Add(new UI("Exit"));
         }
 
         public void LoadContent(ContentManager content)
@@ -26,10 +27,11 @@ namespace AwesomeThreadingFun
             foreach(UI element in main)
             {
                 element.LoadContent(content);
-                element.CenterElement(600, 800);
+                element.CenterElement(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
                 element.clickEvent += OnClick;
             }
-            main.Find(x => x.AssetName == "play").MoveElement(0, -100);
+            main.Find(x => x.AssetName == "Play").MoveElement(0, -50);
+            main.Find(x => x.AssetName == "Exit").MoveElement(0, 50);
         }
 
         public void Update()
@@ -50,12 +52,12 @@ namespace AwesomeThreadingFun
 
         public void OnClick(string element)
         {
-            if(element == "play")
+            if(element == "Play")
             {
                 //Starts game
             }
 
-            if(element == "exit")
+            if(element == "Exit")
             {
                 //Exits game
             }

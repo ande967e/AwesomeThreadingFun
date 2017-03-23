@@ -69,6 +69,7 @@ namespace AwesomeThreadingFun
             Other.Picture.Initialize(Content);
             ButtonEventHandler.Initialize();
             font = Content.Load<SpriteFont>("Fonts/font");
+            main.LoadContent(Content);
 
             GameObject Factory;
 
@@ -126,7 +127,7 @@ namespace AwesomeThreadingFun
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            main.LoadContent(Content);
+            
             
         }
 

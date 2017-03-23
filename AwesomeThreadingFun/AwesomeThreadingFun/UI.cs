@@ -29,6 +29,7 @@ namespace AwesomeThreadingFun
         public UI(string assetName)
         {
             this.AssetName = assetName;
+            UITexture = Other.Picture.GetImage(assetName);
         }
 
         public void LoadContent(ContentManager content)
