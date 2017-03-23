@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace AwesomeThreadingFun
 {
     public enum MouseButton { Left, Middle, Right}
-    public enum ButtonType { LoadingbayUpgrade, CounterUpgrade, PopularityUpgrade, ContractBuy }
+    public enum ButtonType { LoadingbayUpgrade, CounterUpgrade, PopularityUpgrade, ContractBuy, exitbutton, startbutton }
 }

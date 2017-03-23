@@ -14,12 +14,13 @@ namespace AwesomeThreadingFun
     class Menu
     {
         List<UI> main = new List<UI>();
+        public bool MenuVisible = true;
 
         public Menu()
         {
-            main.Add(new UI("menu"));
-            main.Add(new UI("Play"));
-            main.Add(new UI("Exit"));
+            main.Add(new UI("menu", 0.2f));
+            main.Add(new UI("Play", 0));
+            main.Add(new UI("Exit", 0));
         }
 
         public void LoadContent(ContentManager content)
@@ -27,38 +28,44 @@ namespace AwesomeThreadingFun
             foreach(UI element in main)
             {
                 element.CenterElement(Gameworld.Instance.GraphicsDevice.Viewport.Width, Gameworld.Instance.GraphicsDevice.Viewport.Height);
-                element.clickEvent += OnClick;
+                ButtonEventHandler.SubscribeToEvent(OnClick);
             }
             main.Find(x => x.AssetName == "Play").MoveElement(0, 50);
-            main.Find(x => x.AssetName == "Exit").MoveElement(0, 150);
+            main.Find(x => x.AssetName == "Exit").MoveElement(0, 100);
         }
 
         public void Update()
         {
-            foreach(UI element in main)
+            if(MenuVisible == true)
             {
-                element.Update();
+                foreach (UI element in main)
+                {
+                    element.Update();
+                }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(UI element in main)
+            if (MenuVisible == true)
             {
-                element.Draw(spriteBatch);
+                foreach (UI element in main)
+                {
+                    element.Draw(spriteBatch);
+                }
             }
         }
 
-        public void OnClick(string element)
+        public void OnClick(ButtonType element)
         {
-            if(element == "Play")
+            if(element == ButtonType.startbutton)
             {
-                //Starts game
+                MenuVisible = false;
             }
 
-            if(element == "Exit")
+            if(element == ButtonType.exitbutton)
             {
-                //Exits game
+                Gameworld.Instance.Exit();
             }
         }
     }
