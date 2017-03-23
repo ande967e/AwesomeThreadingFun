@@ -61,13 +61,14 @@ namespace AwesomeThreadingFun.Components
                 stock -= goodsToGive;
             }
 
+            totalStock = 0;
             //Updates totalStock 
             totalStock = 0;
             for (int i = 0; i < counters.Count; i++)
             {
                 totalStock += counters[i].Goods;
-                totalStock += stock;
             }
+            totalStock += stock;
         }
 
         public Loadingbay Interact()
