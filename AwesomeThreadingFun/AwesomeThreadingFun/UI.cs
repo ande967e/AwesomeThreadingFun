@@ -17,17 +17,23 @@ namespace AwesomeThreadingFun
         private Rectangle UIRect;
         private string assetName;
 
+        public string AssetName
+        {
+            get{return assetName;}
+            set{assetName = value;}
+        }
+
         public delegate void ElementClicked(string element);
         public event ElementClicked clickEvent;
 
         public UI(string assetName)
         {
-            this.assetName = assetName;
+            this.AssetName = assetName;
         }
 
         public void LoadContent(ContentManager content)
         {
-            UITexture = content.Load<Texture2D>(assetName);
+            UITexture = content.Load<Texture2D>(AssetName);
             UIRect = new Rectangle(0, 0, UITexture.Width, UITexture.Height);
         }
 
@@ -35,7 +41,7 @@ namespace AwesomeThreadingFun
         {
             if(UIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                clickEvent(assetName);
+                clickEvent(AssetName);
             }
         }
 

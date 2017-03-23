@@ -36,7 +36,7 @@ namespace AwesomeThreadingFun
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<GameObject> gos;
-        UI menu;
+        Menu main = new Menu();
 
         private Gameworld()
         {
@@ -55,9 +55,7 @@ namespace AwesomeThreadingFun
         /// </summary>
         protected override void Initialize()
         {
-            // Window Size.
-            /*graphics.PreferredBackBufferWidth = 1000;
-            graphics.PreferredBackBufferHeight = 800;*/
+            
 
             base.Initialize();
 
@@ -128,8 +126,8 @@ namespace AwesomeThreadingFun
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            menu = new UI(images["MenuFinished"]);
-            menu.LoadContent(Content);
+            main.LoadContent(Content);
+            
         }
 
         /// <summary>
@@ -152,6 +150,7 @@ namespace AwesomeThreadingFun
                 Exit();
 
             InputManager.Update(gameTime.TotalGameTime);
+            main.Update();
 
             // TODO: Add your update logic here
 
@@ -183,6 +182,7 @@ namespace AwesomeThreadingFun
             GraphicsDevice.Clear(new Color(new Vector3(.45f, .45f, .45f)));
 
             spriteBatch.Begin(SpriteSortMode.BackToFront);
+            main.Draw(spriteBatch);
             lock (key)
             {
                 for (int i = 0; i < gos.Count; i++)
