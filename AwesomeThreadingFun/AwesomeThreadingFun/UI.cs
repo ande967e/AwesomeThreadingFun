@@ -14,8 +14,10 @@ namespace AwesomeThreadingFun
     class UI
     {
         private Texture2D UITexture;
-        private Rectangle UIRect;
+        public Rectangle UIRect;
         private string assetName;
+        public float Layer { get; set; }
+        
 
         public string AssetName
         {
@@ -24,11 +26,11 @@ namespace AwesomeThreadingFun
         }
 
         public delegate void ElementClicked(string element);
-        public event ElementClicked clickEvent;
 
-        public UI(string assetName)
+        public UI(string assetName, float Layer)
         {
             this.AssetName = assetName;
+            this.Layer = Layer;
             UITexture = Other.Picture.GetImage(assetName);
         }
 
@@ -36,13 +38,19 @@ namespace AwesomeThreadingFun
         {
             if(UIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                clickEvent(AssetName);
+                if(assetName == "menu")
+                {
+                    return;
+                }
+                ButtonEventHandler.FireEvent(assetName == "Play" ? ButtonType.startbutton:ButtonType.exitbutton);
+                
             }
+            
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(UITexture, UIRect, Color.White);
+            spritebatch.Draw(UITexture, UIRect, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, Layer);
         }
 
         public void CenterElement(int width, int height)

@@ -43,7 +43,7 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/font.spritefont
 
-#begin Sprites/Play.png
+#begin Sprites/menu.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -53,7 +53,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Play.png
+/build:Sprites/menu.png
 
 #begin Sprites/Exit.png
 /importer:TextureImporter
@@ -67,7 +67,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Exit.png
 
-#begin Sprites/menu.png
+#begin Sprites/Play.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -77,5 +77,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/menu.png
+/build:Sprites/Play.png
 
