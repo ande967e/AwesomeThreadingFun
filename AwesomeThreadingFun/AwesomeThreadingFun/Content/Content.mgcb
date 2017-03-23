@@ -49,3 +49,9 @@
 /processorParam:TextureFormat=Color
 /build:Menus & UI/MenuFinished.png
 
+#begin Fonts/font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/font.spritefont
+

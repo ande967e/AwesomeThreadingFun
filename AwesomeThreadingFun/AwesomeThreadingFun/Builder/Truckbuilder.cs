@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AwesomeThreadingFun.Components;
 using AwesomeThreadingFun.Other;
+using Microsoft.Xna.Framework;
 
 namespace AwesomeThreadingFun.Builder
 {
@@ -41,7 +42,7 @@ namespace AwesomeThreadingFun.Builder
         {
             go = new GameObject(1);
             go.AddComponent(new Transform(go, VectorF.Zero));
-            go.AddComponent(new Renderer(go, "Building"));
+            go.AddComponent(new Renderer(go, "Building", Color.DarkRed));
             //go.AddComponent(new Animator(go, 5));
             go.AddComponent(new Truck(go, target, dispenser, maxLoad, speed, unloadSpeed));
         }

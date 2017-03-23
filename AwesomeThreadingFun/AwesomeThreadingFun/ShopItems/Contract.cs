@@ -11,9 +11,9 @@ namespace AwesomeThreadingFun.ShopItems
         private int maxNumberOfTrucks;
         private int numberOfTrucks;
         private int contractTime; //the amount of time the contract holds before it stops.          --> Miliseconds.
-        private int contractTimer; //indicates the amount of time the contract have been active.
+        private DateTime creationTime; //indicates the amount of time the contract have been active.
 
-        public int ContractTimer { get { return contractTimer; } set { contractTimer = value; } }
+        public DateTime CreationTime { get { return creationTime; } set { creationTime = value; } }
         public int NumberOfTrucks { get { return numberOfTrucks; } set { numberOfTrucks = value; } }
         public int MaxNumberOfTrucks { get { return maxNumberOfTrucks; } }
         public int ContractTime { get { return contractTime; } }
@@ -25,6 +25,7 @@ namespace AwesomeThreadingFun.ShopItems
             Trucks = new List<Components.Truck>();
             this.contractTime = contractTime;
             this.maxNumberOfTrucks = maxNumberOfTrucks;
+            this.CreationTime = DateTime.Now;
         }
 
         public void AddTruck(Components.Truck truck)

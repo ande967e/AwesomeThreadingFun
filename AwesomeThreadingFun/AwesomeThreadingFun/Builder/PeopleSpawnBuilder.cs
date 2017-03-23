@@ -8,27 +8,25 @@ using AwesomeThreadingFun.Components;
 
 namespace AwesomeThreadingFun.Builder
 {
-    class ShopBuilder : IBuilder
+    class PeopleSpawnBuilder : IBuilder
     {
         private GameObject go;
-        VectorF position;
 
-        public ShopBuilder() : this(VectorF.Zero)
-        { }
+        private VectorF position;
+        private int maxPeople, peopleSpawnDelay;
 
-        public ShopBuilder(VectorF position)
+        public PeopleSpawnBuilder(int maxPeople, int peopleSpawnDelay, VectorF position)
         {
             this.position = position;
+            this.maxPeople = maxPeople;
+            this.peopleSpawnDelay = peopleSpawnDelay;
         }
 
         public void BuildGameobject()
         {
             go = new GameObject();
-
             go.AddComponent(new Transform(go, position));
-            go.AddComponent(new Renderer(go, "Building"));
-            go.AddComponent(new Shop(go));
-            go.AddComponent(new BoxCollider(go));
+            go.AddComponent(new PeopleSpawnCenter(go, peopleSpawnDelay, maxPeople));
         }
 
         public GameObject GetGameobject()
